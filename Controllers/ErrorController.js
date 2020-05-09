@@ -3,7 +3,7 @@ var CustomError = require('../Utils/CustomError')
 var validationError = function (error) {
     var message = '';
     for (const key in error.errors) {
-        message += error.errors[key].message + "\n"
+        message += error.errors[key].message
     }
     myerror = new CustomError(message, 400)
     return myerror
@@ -28,6 +28,7 @@ module.exports = (error, request, response, next) => {
     } else {
         myerror = error
     }
-    response.status(myerror.status || 500).send(myerror)
+    console.log(myerror)
+    response.status(myerror.status || 500).send(error)
 
 }

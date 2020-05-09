@@ -1,9 +1,10 @@
+var dotenv = require('dotenv')
 var express = require('express')
 var mongoose = require('mongoose')
-var dotenv = require('dotenv')
-var UserRouter = require('./Routes/UserRoutes')
 var CatchError = require('./Utils/CatchError')
 var UserModel = require('./Models/UsersModel')
+var UserRouter = require('./Routes/UserRoutes')
+var ProductsRouter = require('./Routes/ProductsRoute')
 var UserController = require('./Controllers/UserController')
 var ErrorController = require('./Controllers/ErrorController')
 
@@ -33,6 +34,8 @@ mongoose.connect(process.env.DB_URL, {
 
 
 app.use('/api/v1/users', UserRouter)
+
+app.use('/api/v1/products', ProductsRouter)
 
 
 

@@ -14,8 +14,13 @@ var UserSchema = new mongoose.Schema({
             },
             message: email => `${email} is invalid email!`
         },
+        lowercase: true,
         required: [true, "Users must provide their email!"],
         unique: true,
+    },
+    photo: {
+        type: String,
+        default: "default.jpg"
     },
     age: {
         type: Number,
@@ -29,6 +34,12 @@ var UserSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
+    password: {
+        type: String,
+        required: [true, "Users must provide their password."],
+        minlength: 5,
+
+    }
 
 })
 
