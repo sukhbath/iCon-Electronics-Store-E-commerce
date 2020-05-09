@@ -1,6 +1,8 @@
 var mongoose = require('mongoose')
 var validator = require('validator')
 var passwordHash = require("password-hash")
+var generator = require('generate-password');
+var crypto = require('crypto')
 
 var UserSchema = new mongoose.Schema({
     name: {
@@ -33,7 +35,8 @@ var UserSchema = new mongoose.Schema({
     },
     active: {
         type: Boolean,
-        default: true
+        default: true,
+        select: false
     },
     password: {
         type: String,
@@ -51,21 +54,50 @@ var UserSchema = new mongoose.Schema({
             },
             message: "Password not matched."
         }
-    }
+    },
+    tempPassword: {
+        type: String,
+        select: false
+    },
+    tempPasswordTime: {
+        type: Date,
+        select: false
+    },
+    passwordChangedAt: Date
+
 
 })
 
 UserSchema.pre("save", function (next) {
-    this.password = passwordHash.generate(this.password)
-    this.confirmPassword = undefined
+    if (this.isModified('password')) {
+        this.password = passwordHash.generate(this.password)
+        this.confirmPassword = undefined
+        this.passwordChangedAt = Date.now()
+    }
     next()
 })
+
+
 
 
 
 UserSchema.methods.isCorrectPassword = function (userPasword, hashedPaswd) {
     return passwordHash.verify(userPasword, hashedPaswd)
 }
+
+
+UserSchema.methods.createTempPassword = function (userPasword, hashedPaswd) {
+    var password = generator.generate({
+        length: 5,
+        numbers: true
+    });
+    this.tempPassword = crypto.createHash("sha256").update(password).digest('hex')
+    this.tempPasswordTime = Date.now() + 10 * 60 * 1000
+    return password
+}
+
+
+
 
 
 var userModel = mongoose.model('users', UserSchema)
