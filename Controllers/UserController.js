@@ -1,11 +1,13 @@
 var UserModel = require('./../Models/UsersModel')
 var CatchError = require('./../Utils/CatchError')
+var CustomError = require('./../Utils/CustomError')
 
 
 exports.createUser = CatchError(async function (request, response, next) {
     var newUser = await UserModel.create(request.body)
     response.status(201).send({
         status: "success",
+        message: "User Created👻",
         data: {
             newUser
         }
@@ -15,6 +17,7 @@ exports.createUser = CatchError(async function (request, response, next) {
 
 exports.getOneUser = CatchError(async function (request, response, next) {
     var user = await UserModel.findById(request.params.id)
+    if (!user) return next(new CustomError('No user found', 404))
     response.status(200).send({
         status: "success",
         data: {
