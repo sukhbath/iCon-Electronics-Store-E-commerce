@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var validator = require('validator')
+var passwordHash = require("password-hash")
 
 var UserSchema = new mongoose.Schema({
     name: {
@@ -38,10 +39,32 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Users must provide their password."],
         minlength: 5,
-
+        select: false
+    },
+    confirmPassword: {
+        type: String,
+        required: [true, "Users must consfirm their password."],
+        select: false,
+        validate: {
+            validator: function (comfirmPass) {
+                return this.password == comfirmPass
+            },
+            message: "Password not matched."
+        }
     }
 
 })
+
+UserSchema.pre("save", function (next) {
+    this.password = passwordHash.generate(this.password)
+    this.confirmPassword = undefined
+    next()
+})
+
+
+
+
+
 
 var userModel = mongoose.model('users', UserSchema)
 

@@ -11,7 +11,8 @@ exports.signup = CatchError(async (request, response, next) => {
     }, process.env.SALT, {
         expiresIn: "30d"
     });
-
+    user.password = undefined
+    response.cookie('jwt', token)
     response.status(201).send({
         status: "success",
         message: "User Signed up",
@@ -33,5 +34,28 @@ exports.checkLogedIn = CatchError(async (request, response, next) => {
 
     var varify = utils.promisify(jwt.verify)
     var data = await varify(token, process.env.SALT)
+
+    var user = await UserModel.findById(data.id)
+    if (!user) return next("This user does'nt exist now.🔑", 401)
+
+    // change password
+
+
     next()
+})
+
+
+
+exports.updatePassword = CatchError(async (request, response, next) => {
+
+})
+
+
+exports.login = CatchError(async (request, response, next) => {
+    var {
+        email,
+        password
+    } = request.body
+
+
 })
