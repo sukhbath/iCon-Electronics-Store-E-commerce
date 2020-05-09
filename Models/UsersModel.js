@@ -63,7 +63,9 @@ UserSchema.pre("save", function (next) {
 
 
 
-
+UserSchema.methods.isCorrectPassword = function (userPasword, hashedPaswd) {
+    return passwordHash.verify(userPasword, hashedPaswd)
+}
 
 
 var userModel = mongoose.model('users', UserSchema)

@@ -2,10 +2,10 @@ var UserModel = require('../Models/UsersModel')
 var CatchError = require('../Utils/CatchError')
 var CustomError = require('../Utils/CustomError')
 var jwt = require('jsonwebtoken')
+var passordHash = require('password-hash')
 var utils = require('util')
 
-exports.signup = CatchError(async (request, response, next) => {
-    var user = await UserModel.create(request.body)
+function sendToken(user, response) {
     var token = jwt.sign({
         id: user.id
     }, process.env.SALT, {
@@ -21,6 +21,13 @@ exports.signup = CatchError(async (request, response, next) => {
         },
         token
     })
+}
+
+
+
+exports.signup = CatchError(async (request, response, next) => {
+    var user = await UserModel.create(request.body)
+    sendToken(user, response)
 })
 
 
@@ -56,6 +63,18 @@ exports.login = CatchError(async (request, response, next) => {
         email,
         password
     } = request.body
+
+    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 400))
+
+
+    var user = await UserModel.findOne({
+        email
+    }).select("+password")
+
+
+    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 400))
+
+    sendToken(user, response)
 
 
 })
