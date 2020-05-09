@@ -4,6 +4,7 @@ var CustomError = require('../Utils/CustomError')
 var jwt = require('jsonwebtoken')
 var passordHash = require('password-hash')
 var crypto = require('crypto')
+var utils = require('util')
 var generator = require('generate-password');
 
 function sendToken(user, statusCode, response) {
@@ -32,31 +33,7 @@ exports.signup = CatchError(async (request, response, next) => {
 })
 
 
-exports.checkLogedIn = CatchError(async (request, response, next) => {
-    var token;
-    if (request.headers.authorization && request.headers.authorization.startsWith("Bearer")) {
-        token = request.headers.authorization.split(" ")[1]
-    }
 
-    if (!token) return next("Please login to get access🔑", 401)
-
-    var varify = utils.promisify(jwt.verify)
-    var data = await varify(token, process.env.SALT)
-
-    var user = await UserModel.findById(data.id)
-    if (!user) return next("This user does'nt exist now.🔑", 401)
-
-    // change password
-
-
-    next()
-})
-
-
-
-exports.updatePassword = CatchError(async (request, response, next) => {
-
-})
 
 
 exports.login = CatchError(async (request, response, next) => {
@@ -66,8 +43,6 @@ exports.login = CatchError(async (request, response, next) => {
     } = request.body
 
     if (!email || !password) return next(new CustomError("Must provide email and password🔐", 400))
-
-
     var user = await UserModel.findOne({
         email
     }).select("+password")
@@ -82,6 +57,7 @@ exports.login = CatchError(async (request, response, next) => {
 
 
 
+
 exports.logout = CatchError(async (request, response, next) => {
     response.cookie("jwt", 'logged out')
     response.send({
@@ -90,6 +66,37 @@ exports.logout = CatchError(async (request, response, next) => {
     })
 })
 
+
+
+exports.checkLogedIn = CatchError(async (request, response, next) => {
+    var token;
+    if (request.headers.authorization && request.headers.authorization.startsWith("Bearer")) {
+        token = request.headers.authorization.split(" ")[1]
+    } else if (response.cookie.jwt) {
+        console.log(response.cookie)
+        token = response.cookie.jwt
+    }
+
+    if (!token) return next(new CustomError("Please login to get access🔑", 401))
+
+    var varify = utils.promisify(jwt.verify)
+    var data = await varify(token, process.env.SALT)
+
+    var user = await UserModel.findById(data.id)
+    if (!user) return next(new CustomError("This user does'nt exist now.🔑", 401))
+
+    if (user.hasChangedPassword(data.iat)) return next(new CustomError("Password changed, Login again➰", 401))
+
+    request.user = user
+
+    next()
+})
+
+
+
+exports.updatePassword = CatchError(async (request, response, next) => {
+
+})
 
 
 exports.forgetPassword = CatchError(async (request, response, next) => {

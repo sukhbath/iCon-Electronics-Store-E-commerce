@@ -63,7 +63,10 @@ var UserSchema = new mongoose.Schema({
         type: Date,
         select: false
     },
-    passwordChangedAt: Date
+    passwordChangedAt: {
+        type: Date,
+        default: Date.now
+    }
 
 
 })
@@ -72,7 +75,7 @@ UserSchema.pre("save", function (next) {
     if (this.isModified('password')) {
         this.password = passwordHash.generate(this.password)
         this.confirmPassword = undefined
-        this.passwordChangedAt = Date.now()
+        this.passwordChangedAt = Date.now() - 1000
     }
     next()
 })
@@ -85,6 +88,9 @@ UserSchema.methods.isCorrectPassword = function (userPasword, hashedPaswd) {
     return passwordHash.verify(userPasword, hashedPaswd)
 }
 
+UserSchema.methods.hasChangedPassword = function (iat) {
+    return ((iat * 1) < this.passwordChangedAt.getTime() / 1000)
+}
 
 UserSchema.methods.createTempPassword = function (userPasword, hashedPaswd) {
     var password = generator.generate({
