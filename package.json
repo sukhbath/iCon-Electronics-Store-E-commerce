@@ -1,0 +1,27 @@
+{
+  "name": "electronics-store-e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "start:p": "set NODE_ENV=production & nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sukhbath/Electronics-Store-E-commerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sukhbath/Electronics-Store-E-commerce/issues"
+  },
+  "homepage": "https://github.com/sukhbath/Electronics-Store-E-commerce#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.13",
+    "nodemon": "^2.0.3",
+    "validator": "^13.0.0"
+  }
+}
