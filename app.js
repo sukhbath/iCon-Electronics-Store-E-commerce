@@ -1,7 +1,11 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var dotenv = require('dotenv')
-var UserModel = require('./Models/Users')
+var UserRouter = require('./Routes/UserRoutes')
+var CatchError = require('./Utils/CatchError')
+var UserModel = require('./Models/UsersModel')
+var UserController = require('./Controllers/UserController')
+var ErrorController = require('./Controllers/ErrorController')
 
 dotenv.config({
     path: `${__dirname}/config.env`
@@ -16,30 +20,25 @@ mongoose.connect(process.env.DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 }).then(v => {
-    console.log('db connected')
+    console.log('-------------------------------------')
+    console.log(':::::::::::db connected::::::::::::::')
+    console.log('-------------------------------------')
+
 }).catch(error => {
     console.log(error)
 })
 
 
-app.post('/api/v1/users', async function (request, response, next) {
 
-    try {
-        var newUser = await UserModel.create(request.body)
-        response.send(newUser)
-    } catch (error) {
-        next(error)
-    }
 
-})
 
-app.use((error, request, response, next) => {
-    if (error.code == 11000) {
-        response.send(error)
-    }
-    response.send(error)
+app.use('/api/v1/users', UserRouter)
 
-})
+
+
+
+
+app.use(ErrorController)
 
 
 app.listen(3000, v => {
