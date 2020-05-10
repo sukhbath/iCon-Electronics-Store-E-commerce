@@ -2,6 +2,7 @@ var express = require('express')
 var cookieparser = require('cookie-parser')
 var ViewRouter = require('./Routes/ViewRoutes')
 var UserRouter = require('./Routes/UserRoutes')
+var ReviewRouter = require('./Routes/ReviewRoute')
 var ProductsRouter = require('./Routes/ProductsRoute')
 var ErrorController = require('./Controllers/ErrorController')
 
@@ -18,6 +19,7 @@ app.use('/', ViewRouter)
 
 app.use('/api/v1/users', UserRouter)
 app.use('/api/v1/products', ProductsRouter)
+app.use('/api/v1/review', ReviewRouter)
 
 app.use(ErrorController)
 
