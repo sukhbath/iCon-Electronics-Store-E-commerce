@@ -19,7 +19,7 @@ app.use('/', ViewRouter)
 
 app.use('/api/v1/users', UserRouter)
 app.use('/api/v1/products', ProductsRouter)
-app.use('/api/v1/review', ReviewRouter)
+app.use('/api/v1/reviews', ReviewRouter)
 
 app.use(ErrorController)
 

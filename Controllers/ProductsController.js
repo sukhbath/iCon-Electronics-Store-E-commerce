@@ -15,7 +15,7 @@ exports.createProduct = CatchError(async (request, response, next) => {
 
 
 exports.getOneProduct = CatchError(async function (request, response, next) {
-    var Product = await ProductModel.findById(request.params.id)
+    var Product = await ProductModel.findById(request.params.id).populate("reviews")
     if (!Product) return next(new CustomError('No Product found to', 404))
     response.status(200).send({
         status: "success",

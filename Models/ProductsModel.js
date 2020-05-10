@@ -26,6 +26,10 @@ var ProductSchema = new mongoose.Schema({
         min: [0, 'Rating must be more than 0,'],
         max: [5, 'Rating must be below 5,']
     },
+    qtyRatings: {
+        type: Number,
+        default: 0
+    },
     images: [String],
     discount: {
         type: Number,
@@ -37,8 +41,33 @@ var ProductSchema = new mongoose.Schema({
         message: 'discount can not be more than actual price'
     }
 
+}, {
+    toJSON: {
+        virtuals: true
+    },
+    toObject: {
+        virtuals: true
+    },
 })
 
+
+// ProductSchema.virtual('Reviews', {
+//     ref: 'reviews',
+//     foreignField: 'product',
+//     localField: '_id',
+// })
+
+ProductSchema.virtual("reviews", {
+    ref: 'reviews',
+    foreignField: 'product',
+    localField: "_id"
+})
+
+
+// ProductSchema.pre(/^find/, function (next) {
+//     this.populate("myreviews")
+//     next()
+// })
 
 ProductSchema.pre('save', function (next) {
     this.slug = slugify(this.name, {
