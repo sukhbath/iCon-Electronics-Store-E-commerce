@@ -28,6 +28,8 @@
     "niceware": "^2.0.0",
     "nodemon": "^2.0.3",
     "password-hash": "^1.2.2",
+    "pug": "^2.0.4",
+    "slugify": "^1.4.0",
     "validator": "^13.0.0"
   }
 }

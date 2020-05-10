@@ -28,7 +28,7 @@ module.exports = (error, request, response, next) => {
     } else {
         myerror = error
     }
-    console.log(myerror)
-    response.status(myerror.status || 500).send(error)
+    console.log(error)
+    response.status(myerror.status || 500).send(myerror)
 
 }
