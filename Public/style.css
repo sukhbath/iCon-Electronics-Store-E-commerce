@@ -167,8 +167,35 @@ img.product {
 
 
 
-/*  login page*/
+/*  detail*/
+#detail-wrap {
+    display: flex;
+    align-items: center;
+}
 
+#detail-wrap>div {
+    padding: 1rem;
+    width: 55%;
+}
+
+#detail-wrap .description {
+    width: 45%;
+}
+
+#detail-wrap .main-image {
+    width: 100%;
+}
+
+.more-images {
+    /* background: red; */
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+}
+
+.more-images img {
+    width: 7rem;
+}
 
 /*  login page*/
 
@@ -282,4 +309,44 @@ form label input:focus {
     width: 18rem;
     margin: 1.5rem auto;
     justify-content: space-around;
+}
+
+
+
+
+
+/* footer */
+
+footer {
+    background: #2cd584;
+    text-align: center;
+}
+
+
+
+
+
+footer img {
+    width: 5rem;
+}
+
+
+footer .link-icons {
+    display: flex;
+    width: 20rem;
+    padding: 1rem;
+    margin: auto;
+    justify-content: space-around;
+}
+
+footer .link-icons a {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+footer p {
+    font-weight: bold;
+    color: white;
+    padding: 1rem;
 }

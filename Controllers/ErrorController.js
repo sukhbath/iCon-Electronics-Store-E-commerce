@@ -29,6 +29,10 @@ module.exports = (error, request, response, next) => {
         myerror = error
     }
     console.log(error)
-    response.status(myerror.status || 500).send(myerror)
+    // response.status(myerror.status || 500).send(myerror)
+
+    response.render("404", {
+        error: myerror.message
+    })
 
 }

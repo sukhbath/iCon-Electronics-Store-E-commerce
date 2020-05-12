@@ -69,12 +69,13 @@ exports.logout = CatchError(async (request, response, next) => {
 
 
 exports.checkLogedIn = CatchError(async (request, response, next) => {
+    console.log("i am here++++++++++++++++++++++++===")
     var token;
     if (request.headers.authorization && request.headers.authorization.startsWith("Bearer")) {
         token = request.headers.authorization.split(" ")[1]
-    } else if (response.cookie.jwt) {
-        console.log(response.cookie)
-        token = response.cookie.jwt
+    } else if (request.cookies.jwt) {
+        console.log(request.cookies.jwt)
+        token = request.cookies.jwt
     }
 
     if (!token) return next(new CustomError("Please login to get access🔑", 401))

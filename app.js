@@ -11,7 +11,6 @@ app.use(express.json())
 app.use(cookieparser())
 
 app.use(express.static(`${__dirname}/public/`))
-// app.set('view engine', 'pug')
 app.set('views', `${__dirname}/Public/views`)
 app.set('view engine', 'pug')
 

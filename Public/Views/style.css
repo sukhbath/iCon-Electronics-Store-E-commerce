@@ -280,3 +280,40 @@ form label input:focus {
     margin: 1.5rem auto;
     justify-content: space-around;
 }
+
+
+
+
+footer {
+    background: #2cd584;
+    text-align: center;
+}
+
+
+
+
+
+footer img {
+    width: 5rem;
+}
+
+
+footer .link-icons {
+    display: flex;
+    width: 20rem;
+    padding: 1rem;
+    margin: auto;
+    justify-content: space-around;
+}
+
+footer .link-icons a {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+footer p {
+    font-weight: bold;
+    padding: 1rem;
+    color: white;
+}

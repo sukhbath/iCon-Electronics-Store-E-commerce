@@ -1,16 +1,17 @@
 extends base
 block content
-    each image in product.images
-        img(src=`images/${product.name}/${image}.jpg`,alt=`${product.name}`,class="product")
-    h2= product.name
-    p= product.avgRating
-    | out of
-    p= product.qtyRatings
-    div 
-        if product.reviews.length>0
-            h1 reviews
+    #detail-wrap
+        .images
+            img.main-image(src=`/images/${product.name}/${product.coverImage}.jpg` alt='')
+            .more-images
+                each image in product.images
+                    img(src=`/images/${product.name}/${image}.jpg` alt='')
+        .description
+            h1= product.name
+            h3= product.avgRating
+            h3= product.qtyRatings
+            p= product.summary
             each review in product.reviews
-                div 
-                    h2 #{review.review} by
-                    h3
-                        u= review.user.name
+                p= review.review
+                | by
+                p= review.user.name

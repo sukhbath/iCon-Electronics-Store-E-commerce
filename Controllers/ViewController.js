@@ -26,5 +26,9 @@ exports.login = async function (request, response, next) {
 
 
 exports.logout = async function (request, response, next) {
-    response.render("login")
+    response.cookie("jwt", 'logged out')
+    response.send({
+        status: "success",
+        message: "User Logged Out",
+    })
 }
