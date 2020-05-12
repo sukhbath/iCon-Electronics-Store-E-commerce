@@ -1,0 +1,19 @@
+extends base
+block content
+    .form-content
+        .form-wrap
+            h1 Sign in to Account
+            form#login-form
+                label(for='email')
+                    h4 Email
+                    input#email(type='email' name='')
+                label(for='password')
+                    h4 Password
+                    input#password(type='password' name='')
+                a(href='') Forget password?
+            button#signinBtn Sign In
+            .links
+                a(href='') Privacy Policy
+                a(href='') Terms &amp; Conditions
+        .go-to.go-to-signup
+            a(href='/signup') Go to Signup

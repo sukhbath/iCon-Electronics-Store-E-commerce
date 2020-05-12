@@ -1,26 +1,13 @@
 extends base
 block content
-    header
-        a#homepage(href='/')
-            img(src='./default.png' alt='' srcset='')
-        nav
-            a(href='') Home
-            a(href='') Shop
-            a(href='') About
-            a(href='') Contact
-            button
-                i.fas.fa-shopping-cart
-                sup 2
-        #profile
-            i.fas.fa-user-circle
-            p.username Sukh
     main
-        #card
-            .image-wrap
-                img(src='./81DuDX2ZA8L._AC_SL1500_.jpg' alt='')
-                .popover
-                    a(href='#') View
-            h2.name MACBOOK
-            p Lorem ipsum dolor sit amet consectetur.
-            h2.price $40
-            h2.add Add to cart
+        each product in products
+            #card
+                .image-wrap
+                    img(src=`images/${product.name}/${product.coverImage}.jpg` alt=`${product.name}`)
+                    .popover
+                        a(href=`product/${product.slug}`) View
+                h2.name= product.name
+                p= product.summary
+                h2.price $#{product.price}
+                h2.add Add to cart

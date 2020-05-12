@@ -8,10 +8,7 @@ var ProductSchema = new mongoose.Schema({
         unique: true
     },
     slug: String,
-    coverImage: {
-        type: String,
-        required: [true, "Must provide cover image of product !"],
-    },
+    coverImage: String,
     price: {
         type: Number,
         required: [true, "Please provide product price"],
@@ -28,11 +25,12 @@ var ProductSchema = new mongoose.Schema({
     },
     qtyRatings: {
         type: Number,
-        default: 0
+        default: 1
     },
     images: [String],
     discount: {
         type: Number,
+        default: 0,
         validate: {
             validator: function (discount) {
                 return (this.price > discount)
@@ -51,12 +49,6 @@ var ProductSchema = new mongoose.Schema({
 })
 
 
-// ProductSchema.virtual('Reviews', {
-//     ref: 'reviews',
-//     foreignField: 'product',
-//     localField: '_id',
-// })
-
 ProductSchema.virtual("reviews", {
     ref: 'reviews',
     foreignField: 'product',
@@ -64,15 +56,11 @@ ProductSchema.virtual("reviews", {
 })
 
 
-// ProductSchema.pre(/^find/, function (next) {
-//     this.populate("myreviews")
-//     next()
-// })
-
 ProductSchema.pre('save', function (next) {
     this.slug = slugify(this.name, {
         lower: true
     })
+    this.coverImage = this.images[0]
     next()
 })
 
