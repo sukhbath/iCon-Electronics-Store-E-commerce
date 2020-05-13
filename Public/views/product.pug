@@ -1,0 +1,22 @@
+extends base
+block content
+    #details
+        .flex-container
+            .images
+                img(src=`/images/${product.name}/${product.images[0]}.jpg` alt='')
+                .more-images.flex-container
+                    each image in product.images
+                        img(src=`/images/${product.name}/${image}.jpg` alt='')
+            .description
+                h2 Acer Laptop
+                h3
+                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veniam quae provident quasi unde
+                    | fuga,
+                    | doloribus distinctio itaque incidunt culpa?
+                h2 #{product.avgRating} out of 4&#x2B50; by #{product.qtyRatings} people
+        #reviews
+            h2 Reviews
+            each review in product.reviews
+                .review
+                    p= review.review
+                    h4 by #{review.user.name}
