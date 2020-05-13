@@ -1,17 +1,23 @@
 extends base
 block content
-    #detail-wrap
+    .product-detail
         .images
-            img.main-image(src=`/images/${product.name}/${product.coverImage}.jpg` alt='')
+            img.main-img(src=`/images/${product.name}/${product.images[0]}.JPG` alt='')
             .more-images
                 each image in product.images
-                    img(src=`/images/${product.name}/${image}.jpg` alt='')
-        .description
+                    img(src=`/images/${product.name}/${image}.JPG` alt='')
+        .discription
             h1= product.name
-            h3= product.avgRating
-            h3= product.qtyRatings
-            p= product.summary
-            each review in product.reviews
-                p= review.review
-                | by
-                p= review.user.name
+            h3 &#x2B50; #{ product.avgRating}/5 by &#x1F468;&zwj;&#x1F469;&zwj;&#x1F466;#{product.qtyRatings}
+            h2.summary= product.summary
+            button Add to cart
+            .reviews
+                h2 Reviews
+                each review in product.reviews
+                    .review
+                    h3= review.review
+                    h4 
+                        | by 
+                        span= review.user.name
+                        |  at 
+                        span 12:00 am

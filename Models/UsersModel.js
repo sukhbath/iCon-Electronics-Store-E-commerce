@@ -27,11 +27,11 @@ var UserSchema = new mongoose.Schema({
     },
     age: {
         type: Number,
-        required: [true, "Users must provide their age!"]
+        // required: [true, "Users must provide their age!"]
     },
     contact: {
         type: String,
-        required: [true, "Users must provide their contact number."]
+        // required: [true, "Users must provide their contact number."]
     },
     active: {
         type: Boolean,

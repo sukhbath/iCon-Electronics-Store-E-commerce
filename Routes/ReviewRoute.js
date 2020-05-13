@@ -4,7 +4,7 @@ var ReviewController = require('../Controllers/ReviewController')
 
 var route = express.Router()
 
-route.use(AuthController.checkLogedIn)
+route.use(AuthController.protect)
 
 route.route('/').get(ReviewController.getAllReviewForTour)
 route.route('/').get(ReviewController.getAllReview).post(ReviewController.createReview)

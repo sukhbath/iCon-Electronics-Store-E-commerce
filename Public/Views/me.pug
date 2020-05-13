@@ -1,0 +1,31 @@
+extends base
+block content
+    #my-profile
+        #bio
+            img(src=`images/users/${me.photo}` alt='')
+            h1= me.name
+            h2= me.email
+        form#updateMe-form
+            h2 Update Info
+            label(for='photo')
+                h4 Photo
+                input#photo(type='file')
+            label(for='name')
+                h4 Name
+                input#name(type='name')
+            label(for='email')
+                h4 Email
+                input#email(type='email')
+            button Update
+        form#changePassword-form
+            h2  Change Password
+            label(for='oldPassword')
+                h4 Old Password
+                input#oldPassword(type='password')
+            label(for='password')
+                h4 Password
+                input#password(type='password')
+            label(for='confirmPassword')
+                h4 Confirm Password
+                input#confirmPassword(type='password')
+            button Change Password

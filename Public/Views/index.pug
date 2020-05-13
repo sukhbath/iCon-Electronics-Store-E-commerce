@@ -1,13 +1,3 @@
 extends base
 block content
-    main
-        each product in products
-            #card
-                .image-wrap
-                    img(src=`images/${product.name}/${product.coverImage}.jpg` alt=`${product.name}`)
-                    .popover
-                        a(href=`product/${product.slug}`) View
-                h2.name= product.name
-                p= product.summary
-                h2.price $#{product.price}
-                h2.add Add to cart
+    h2 index page

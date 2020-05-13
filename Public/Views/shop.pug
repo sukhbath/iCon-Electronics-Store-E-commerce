@@ -1,0 +1,15 @@
+extends base
+block content
+    h2 Shop All
+    #allproducts
+        each product in products
+            .product
+                .product-img
+                    img(src=`/images/${product.name}/${product.images[0]}.JPG` alt='')
+                    .pop
+                        a(href=`/product/${product.slug}`) View
+                h3 Rating #{product.avgRating}/5
+                h2= product.name
+                h2= product.price
+                button Add to Cart
+            

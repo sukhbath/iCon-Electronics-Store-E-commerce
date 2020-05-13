@@ -28,6 +28,7 @@ function sendToken(user, statusCode, message, response) {
 
 
 exports.signup = CatchError(async (request, response, next) => {
+    console.log(request.body)
     var user = await UserModel.create(request.body)
     sendToken(user, 201, "User Signed up", response)
 })
@@ -37,6 +38,7 @@ exports.signup = CatchError(async (request, response, next) => {
 
 
 exports.login = CatchError(async (request, response, next) => {
+    console.log(request.body)
     var {
         email,
         password
@@ -68,8 +70,7 @@ exports.logout = CatchError(async (request, response, next) => {
 
 
 
-exports.checkLogedIn = CatchError(async (request, response, next) => {
-    console.log("i am here++++++++++++++++++++++++===")
+exports.protect = CatchError(async (request, response, next) => {
     var token;
     if (request.headers.authorization && request.headers.authorization.startsWith("Bearer")) {
         token = request.headers.authorization.split(" ")[1]
@@ -90,6 +91,31 @@ exports.checkLogedIn = CatchError(async (request, response, next) => {
 
     request.user = user
 
+    next()
+})
+
+
+exports.isLoggedIn = CatchError(async (request, response, next) => {
+    if (request.cookies.jwt) {
+        try {
+            console.log(request.cookies.jwt)
+            token = request.cookies.jwt
+
+            var varify = utils.promisify(jwt.verify)
+            var data = await varify(token, process.env.SALT)
+
+            var user = await UserModel.findById(data.id)
+            if (!user) return next()
+
+            if (user.hasChangedPassword(data.iat)) return next()
+
+            response.locals.user = user
+            request.user = user
+            return next()
+        } catch (error) {
+            return next()
+        }
+    }
     next()
 })
 
