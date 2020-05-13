@@ -7,17 +7,17 @@ var crypto = require('crypto')
 var utils = require('util')
 var generator = require('generate-password');
 
-function sendToken(user, statusCode, response) {
+function sendToken(user, statusCode, message, response) {
     var token = jwt.sign({
         id: user.id
     }, process.env.SALT, {
-        expiresIn: "30d"
+        expiresIn: process.env.JWT_TOKEN_EXPIRE
     });
     user.password = undefined
     response.cookie('jwt', token)
     response.status(statusCode).send({
         status: "success",
-        message: "User Signed up",
+        message,
         data: {
             user
         },
@@ -29,7 +29,7 @@ function sendToken(user, statusCode, response) {
 
 exports.signup = CatchError(async (request, response, next) => {
     var user = await UserModel.create(request.body)
-    sendToken(user, 201, response)
+    sendToken(user, 201, "User Signed up", response)
 })
 
 
@@ -50,7 +50,7 @@ exports.login = CatchError(async (request, response, next) => {
 
     if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 400))
 
-    sendToken(user, 201, response)
+    sendToken(user, 201, "User Logged in", response)
 
 
 })
@@ -143,7 +143,7 @@ exports.resetPassword = CatchError(async (request, response, next) => {
 
     await user.save()
 
-    sendToken(user, 200, response)
+    sendToken(user, 200, "Password has been reset", response)
 
 
 })
