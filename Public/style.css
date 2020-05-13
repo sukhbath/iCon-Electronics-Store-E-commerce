@@ -15,6 +15,7 @@ button {
     outline: none;
     border: none;
     font-family: inherit;
+    background: gray;
 }
 
 a {
