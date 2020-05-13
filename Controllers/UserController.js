@@ -26,6 +26,20 @@ exports.getOneUser = CatchError(async function (request, response, next) {
     })
 })
 
+exports.getMe = CatchError(async function (request, response, next) {
+    console.log('me')
+    var user = await UserModel.findById(request.user.id)
+    if (!user) return next(new CustomError('No user found to', 404))
+    response.status(200).send({
+        status: "success",
+        data: {
+            user
+        }
+    })
+})
+
+
+
 exports.getAllUsers = CatchError(async function (request, response, next) {
     var users = await UserModel.find()
     response.status(200).send({

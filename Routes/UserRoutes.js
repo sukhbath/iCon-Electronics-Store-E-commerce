@@ -10,7 +10,7 @@ router.get('/logout', AuthController.logout)
 router.post('/forgetPassword', AuthController.forgetPassword)
 router.patch('/resetPassword/:tempPassword', AuthController.resetPassword)
 
-
+router.get('/me', AuthController.protect, UserController.getMe)
 router.route("/").get(UserController.getAllUsers).post(UserController.createUser)
 router.route("/:id").get(UserController.getOneUser).patch(UserController.updateUser).delete(UserController.deleteUser)
 

@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken')
 var passordHash = require('password-hash')
 var crypto = require('crypto')
 var utils = require('util')
+var SendEmail = require('../Utils/Email')
 var generator = require('generate-password');
 
 function sendToken(user, statusCode, message, response) {
@@ -30,6 +31,7 @@ function sendToken(user, statusCode, message, response) {
 exports.signup = CatchError(async (request, response, next) => {
     console.log(request.body)
     var user = await UserModel.create(request.body)
+    SendEmail("Welcome, account created.")
     sendToken(user, 201, "User Signed up", response)
 })
 
@@ -61,7 +63,9 @@ exports.login = CatchError(async (request, response, next) => {
 
 
 exports.logout = CatchError(async (request, response, next) => {
-    response.cookie("jwt", 'logged out')
+    response.cookie("jwt", 'logged out', {
+        expires: Date.now() + 1000 * 10
+    })
     response.send({
         status: "success",
         message: "User Logged Out",

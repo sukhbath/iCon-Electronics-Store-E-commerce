@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.13",
     "niceware": "^2.0.0",
+    "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
     "password-hash": "^1.2.2",
     "pug": "^2.0.4",
