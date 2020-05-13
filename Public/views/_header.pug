@@ -1,11 +1,11 @@
 header.flex-container
   nav
-    a.logo(href='/') Logo
-    a(href='/shop') shop
-    a(href='/logout') logout
-    a(href='/login') login
-    a(href='/signup') signup
-    a(href='/me') me
+    a.logo(href='/')
+      img(src='/LOGO.png' alt='' srcset='')
+    a(href='/shop') All
+    a(href='/') Laptop
+    a(href='/') Mobiles
+    a(href='/signup') About
   .buttons.flex-container
     .fav-button
       a(href='')
@@ -13,11 +13,17 @@ header.flex-container
     .cart-button
       a(href='')
         i.fas.fa-shopping-cart
-    .profile-button
-      .dropdwon
+    .profile-button.dropdown
+      div
         span.username
-          img(src='me.JPG' alt='')
           if user
+            img(src='me.JPG' alt='')
             | #{user.name}
-          else
-            | Login please
+          else 
+            a(href='/login') Login
+      .dropdown-content
+        if user
+          a(href='/') Profile
+          a(href='/') Logout
+        else
+          a(href='/') Sign Up

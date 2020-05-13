@@ -1,9 +1,10 @@
 extends base
 block content
     #details
+        h2= product
         .flex-container
             .images
-                img(src=`/images/${product.name}/${product.images[0]}.jpg` alt='')
+                img(src=`/images/${product.name}/${product.coverImage}.jpg` alt='')
                 .more-images.flex-container
                     each image in product.images
                         img(src=`/images/${product.name}/${image}.jpg` alt='')
@@ -13,7 +14,7 @@ block content
                     | Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veniam quae provident quasi unde
                     | fuga,
                     | doloribus distinctio itaque incidunt culpa?
-                h2 #{product.avgRating} out of 4&#x2B50; by #{product.qtyRatings} people
+                h2 #{product.avgRating} out of 5&#x2B50; by #{product.qtyRatings} people
         #reviews
             h2 Reviews
             each review in product.reviews

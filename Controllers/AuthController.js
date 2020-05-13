@@ -29,7 +29,6 @@ function sendToken(user, statusCode, message, response) {
 
 
 exports.signup = CatchError(async (request, response, next) => {
-    console.log(request.body)
     var user = await UserModel.create(request.body)
     SendEmail("Welcome, account created.")
     sendToken(user, 201, "User Signed up", response)
@@ -40,7 +39,6 @@ exports.signup = CatchError(async (request, response, next) => {
 
 
 exports.login = CatchError(async (request, response, next) => {
-    console.log(request.body)
     var {
         email,
         password
@@ -79,7 +77,6 @@ exports.protect = CatchError(async (request, response, next) => {
     if (request.headers.authorization && request.headers.authorization.startsWith("Bearer")) {
         token = request.headers.authorization.split(" ")[1]
     } else if (request.cookies.jwt) {
-        console.log(request.cookies.jwt)
         token = request.cookies.jwt
     }
 
@@ -102,7 +99,6 @@ exports.protect = CatchError(async (request, response, next) => {
 exports.isLoggedIn = CatchError(async (request, response, next) => {
     if (request.cookies.jwt) {
         try {
-            console.log(request.cookies.jwt)
             token = request.cookies.jwt
 
             var varify = utils.promisify(jwt.verify)

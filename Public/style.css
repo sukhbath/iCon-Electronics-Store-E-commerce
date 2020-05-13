@@ -15,7 +15,6 @@ button {
     outline: none;
     border: none;
     font-family: inherit;
-    background: gray;
 }
 
 a {
@@ -23,9 +22,15 @@ a {
     text-decoration: none;
 }
 
+.logo img {
+    width: 5rem;
+    height: 2rem;
+    /* background: rgb(78, 76, 76); */
+    object-fit: cover;
+}
 
-
-.flex-container {
+.flex-container,
+nav {
     display: flex;
     align-items: center;
 }
@@ -68,6 +73,71 @@ header .profile-button img {
     height: 1.5rem;
     border-radius: 50%;
     margin-right: .3rem;
+}
+
+
+.dropdown {
+    position: relative;
+    /* background: yellow; */
+}
+
+.dropdown-content {
+    position: absolute;
+    background: rgb(65, 65, 65);
+    top: 100%;
+    right: 0%;
+    width: 8rem;
+    padding: 0;
+    border-radius: 3px;
+    display: none;
+    /* transform: translate(-50%, 0); */
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: .7rem 0;
+    margin: 0;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background: rgb(99, 99, 99);
+
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    /* background: red; */
+}
+
+
+
+main {
+    margin: 1rem 0;
+}
+
+/* add */
+#add {
+    text-align: center;
+}
+
+#add h2 {
+    margin: 1rem;
+}
+
+
+#add a {
+    font-size: 1.3rem;
+    padding: .5rem 2rem;
+    background: #14bfaf;
+    color: white;
+}
+
+
+
+#add img {
+    height: 70vh;
 }
 
 
@@ -135,4 +205,40 @@ header .profile-button img {
 
 .more-images img {
     width: 3rem;
+}
+
+
+/* footer */
+footer {
+    background: #14bfaf;
+    text-align: center;
+    color: white;
+    padding: 1rem 0;
+}
+
+
+footer .links {
+    /* background: red; */
+    justify-content: space-between;
+    width: 10rem;
+    margin: auto;
+    font-size: 1.5rem;
+
+}
+
+footer .links a {
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+footer .logo img {
+    width: 10rem;
+    height: 5rem;
+
+    object-fit: cover;
+}
+
+footer h2 {
+    color: white;
 }
