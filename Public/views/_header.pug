@@ -5,6 +5,7 @@ header.flex-container
     a(href='/logout') logout
     a(href='/login') login
     a(href='/signup') signup
+    a(href='/me') me
   .buttons.flex-container
     .fav-button
       a(href='')
@@ -16,4 +17,7 @@ header.flex-container
       .dropdwon
         span.username
           img(src='me.JPG' alt='')
-          | Sukh
+          if user
+            | #{user.name}
+          else
+            | Login please
