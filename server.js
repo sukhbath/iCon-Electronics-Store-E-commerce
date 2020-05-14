@@ -1,6 +1,8 @@
 var dotenv = require('dotenv')
 var app = require('./app')
 var mongoose = require('mongoose')
+mongoose.set('useFindAndModify', false);
+
 
 dotenv.config({
     path: `${__dirname}/config.env`

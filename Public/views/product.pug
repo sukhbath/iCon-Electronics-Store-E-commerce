@@ -18,5 +18,7 @@ block content
             h2 Reviews
             each review in product.reviews
                 .review
-                    p= review.review
-                    h4 by #{review.user.name}
+                    h3= review.review
+                    p by 
+                        span #{review.user.name}
+        

@@ -59,12 +59,13 @@ exports.createReview = CatchError(async (request, response, next) => {
 
 
 exports.updateReview = CatchError(async (request, response, next) => {
+
+    console.log('here')
     var review = await ReviewModel.findByIdAndUpdate(request.params.id, request.body, {
         new: true
     })
-    console.log('here')
 
-    updateProduct(review.product.id)
+
 
     response.status(200).send({
         status: "success",
@@ -89,38 +90,3 @@ exports.deleteReview = CatchError(async (request, response, next) => {
     })
 
 })
-
-
-
-
-// 
-
-async function updateProduct(productId) {
-    var result = await ReviewModel.aggregate([{
-            $match: {
-                "product": productId
-            }
-        },
-        {
-            $group: {
-                _id: "$product",
-                avgRating: {
-                    $avg: '$rating'
-                },
-                totalRating: {
-                    $sum: 1
-                }
-
-            }
-        }
-    ])
-
-    var product = await ProductModel.findByIdAndUpdate(productId, {
-        avgRating: result[0].avgRating,
-        qtyRatings: result[0].totalRating
-    })
-
-
-    console.log("product")
-    console.log(product)
-}

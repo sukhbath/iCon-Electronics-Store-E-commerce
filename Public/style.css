@@ -115,6 +115,7 @@ header .profile-button img {
 
 main {
     margin: 1rem 0;
+    padding: .5rem;
 }
 
 /* add */
@@ -205,6 +206,29 @@ main {
 
 .more-images img {
     width: 3rem;
+}
+
+
+#reviews h2 {
+    color: #ffae19;
+}
+
+.review {
+    margin: .5rem 0;
+}
+
+.review h3 {
+    text-transform: capitalize;
+    margin: .3rem 0;
+}
+
+.review p span {
+    background-color: #ffae19;
+    text-transform: capitalize;
+    padding: .1rem .5rem;
+    border-radius: 50px;
+    color: white;
+
 }
 
 
