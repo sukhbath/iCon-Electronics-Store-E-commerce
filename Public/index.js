@@ -1,3 +1,4 @@
+console.log('sukh')
 document.getElementsByTagName("form")[0].addEventListener('submit', e => {
     e.preventDefault()
 })
@@ -43,6 +44,44 @@ if (signUpBtn) {
                 name,
                 password,
                 confirmPassword
+            })
+            alert("successfully signedup in")
+        } catch (error) {
+            alert("error")
+
+        } finally {
+            console.log(response)
+
+        }
+    })
+
+}
+
+
+
+
+document.getElementsByTagName("form")[0].addEventListener('submit', e => {
+    e.preventDefault()
+})
+var addReviewBtn = document.getElementById('addReviewBtn')
+if (addReviewBtn) {
+    addReviewBtn.addEventListener('click', async e => {
+        var review = document.getElementById('reviewInput').value
+        var rating = document.getElementById('ratingInput').value
+        const productElm = document.querySelector('#getProductId');
+        var product = productElm.dataset.pid // "3"
+        console.log({
+            review,
+            rating,
+            product
+        })
+
+        var response;
+        try {
+            response = await axios.post('/api/v1/reviews', {
+                review,
+                rating,
+                product
             })
             alert("successfully signedup in")
         } catch (error) {

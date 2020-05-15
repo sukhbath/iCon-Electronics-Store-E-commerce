@@ -1,4 +1,7 @@
 extends base
 block content
-    h2= me.name
-    h2= me.email
+    #profile
+        img(src=`${user.photo}`, alt="alt")
+        h1.name= me.name.toUpperCase()
+        h2.email= me.email.toUpperCase()
+

@@ -17,13 +17,13 @@ header.flex-container
       div
         span.username
           if user
-            img(src='me.JPG' alt='')
+            img(src=`/${user.photo}` alt='')
             | #{user.name}
           else 
             a(href='/login') Login
       .dropdown-content
         if user
-          a(href='/') Profile
+          a(href='/me') Profile
           a(href='/') Logout
         else
           a(href='/') Sign Up

@@ -3,22 +3,29 @@ block content
     #details
         .flex-container
             .images
-                img(src=`/images/${product.name}/${product.coverImage}.jpg` alt='')
+                img(src=`/images/${product.coverImage}.jpg` alt='')
                 .more-images.flex-container
                     each image in product.images
-                        img(src=`/images/${product.name}/${image}.jpg` alt='')
+                        img(src=`/images/${image}.jpg` alt='')
             .description
-                h2 Acer Laptop
-                h3
-                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veniam quae provident quasi unde
-                    | fuga,
-                    | doloribus distinctio itaque incidunt culpa?
-                h2 #{product.avgRating} out of 5&#x2B50; by #{product.qtyRatings} people
+                h2.name(data-pid=`${product.id}` id="getProductId")= product.name
+                h3.summary= product.summary
+                h2.rating Rating: #{product.avgRating.toFixed(2)}/5&#x2B50; 
+                button.addtocart 
+                    | Add to cart
+                    i.fas.fa-cart-plus 
         #reviews
-            h2 Reviews
+            h1 Reviews
             each review in product.reviews
                 .review
-                    h3= review.review
-                    p by 
+                    p 
+                        img(src=`/${user.photo}` alt='') 
                         span #{review.user.name}
+                    h3= review.review
+                    | #{(review.createdAt).toUTCString()}
+        #addReview
+            form#addReview-form
+                input(type="text" placeholder="my review" id="reviewInput")
+                input(type="text" placeholder="my review" id="ratingInput")
+                button#addReviewBtn Add
         

@@ -8,7 +8,7 @@ var ReviewSchema = new mongoose.Schema({
     rating: {
         type: Number,
         min: [0, 'rating can not be below 0'],
-        max: [5, 'rating can not be above 5']
+        max: [5, 'rating can not be above 5'],
     },
     product: {
         type: mongoose.Schema.ObjectId,

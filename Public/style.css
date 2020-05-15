@@ -181,20 +181,19 @@ main {
 
 
 /* detail */
-#details img {
-    width: 15rem;
+#details .flex-container {
+    align-items: flex-start;
 }
-
 
 #details .images {
     width: 55%;
+    /* background: red; */
 }
 
 
 #details .description {
     width: 45%;
 }
-
 
 #details .images>img {
     width: 80%;
@@ -204,31 +203,115 @@ main {
     object-fit: contain;
 }
 
-.more-images img {
-    width: 3rem;
+.more-images {
+    display: flex;
+    justify-content: space-around;
+    /* overflow: hidden; */
 }
 
 
-#reviews h2 {
+.more-images img {
+    width: 20%;
+}
+
+#details .name {
+    color: #ffae19;
+
+}
+
+#details .summary {
+    margin: 1rem 0;
+}
+
+#details .addtocart {
+    background: #ffae19;
+    padding: .5rem 1rem;
+    font-size: 1.3rem;
+    color: white;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+#details .addtocart i {
+    margin: 0 .5rem;
+}
+
+
+
+#reviews {
+    margin: 2rem 0;
+
+}
+
+#reviews h1 {
     color: #ffae19;
 }
 
 .review {
     margin: .5rem 0;
+    background: rgb(238, 238, 238);
+    padding: 1rem .5rem;
+
 }
 
 .review h3 {
     text-transform: capitalize;
     margin: .3rem 0;
+    font-size: 2rem;
 }
 
 .review p span {
-    background-color: #ffae19;
+    color: #ffae19;
     text-transform: capitalize;
-    padding: .1rem .5rem;
-    border-radius: 50px;
-    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
 
+}
+
+.review p img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+
+
+#addReview input {
+    display: block;
+    border: 2px gray solid;
+    border-radius: 3px;
+    padding: .3rem .5rem;
+    width: 40vw;
+}
+
+
+#addReview button {
+    display: block;
+    background: #14bfaf;
+    border-radius: 3px;
+    padding: .3rem 1rem;
+    color: white;
+    margin: .5rem 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+/* profile */
+#profile {
+    text-align: center;
+}
+
+#profile img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+    background: red;
+}
+
+#profile .name {
+    margin: 1rem 0;
 }
 
 

@@ -46,6 +46,7 @@ exports.getAllReviewForTour = CatchError(async (request, response, next) => {
 
 
 exports.createReview = CatchError(async (request, response, next) => {
+    request.body.user = request.user.id
     var review = await ReviewModel.create(request.body)
     response.status(201).send({
         status: "success",

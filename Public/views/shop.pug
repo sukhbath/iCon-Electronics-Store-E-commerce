@@ -4,7 +4,7 @@ block content
     #products
         each product in products
             .product
-                img(src=`/images/${product.name}/${product.images[0]}.jpg` alt='')
+                img(src=`/images/${product.images[0]}.jpg` alt='')
                 h2= product.name
                 h3
                 i.far.fa-star
