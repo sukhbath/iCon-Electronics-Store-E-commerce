@@ -1,0 +1,25 @@
+header.flex-container
+  nav.flex-container
+    a.logo(href='/')
+      img(src='/logo.png' alt='')
+    a(href='/shop') Laptops
+    a(href='#') Mobiles
+    a(href='/shop') All
+    a(href='#') About
+  .buttons.flex-container
+    #wish-cart-btn
+      i.fas.fa-heart
+    #product-cart-btn
+      i.fas.fa-shopping-cart
+    #user-btn.drop-down
+      #current-user.flex-container
+        if user
+          img(src='default.jpg' alt='')
+          span.user-name Sukh
+        else
+          a(href='/login') Login
+      .drop-down-content
+        a(href='/me') Profile
+        if user
+          a(href='/logout') Logout
+        a(href='/signup') Signup

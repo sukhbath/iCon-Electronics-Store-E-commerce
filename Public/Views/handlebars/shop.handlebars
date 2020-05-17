@@ -1,0 +1,37 @@
+<main>
+    <h1>All Products</h1>
+    <div id="all-products" class="flex-container">
+        {{#each  products as |product| }}
+        <div class="product">
+            {{#each this}}
+            <img src='/images/{{coverImage}}.jpg' alt="">
+            {{/each}}
+            <div>
+                {{#each this}}
+                <h2 class="name">{{name}}</h2>
+                {{/each}}
+                <div class="rating">
+                    {{#each this}}
+                    {{avgRating}}
+                    {{/each}}
+                    <i class="fas fa-star active"></i>
+                </div>
+                <div class="flex-container">
+                    {{#each this}}
+                    <h2 class="price">${{price}} </h2>
+                    {{/each}}
+                    <h2>
+                        {{#each this}}
+                        <a href="/product/{{slug}}">View</a>
+                        {{/each}}
+                    </h2>
+                </div>
+                <h2 class="add-to-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    Add to Cart
+                </h2>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</main>

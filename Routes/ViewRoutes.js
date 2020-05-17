@@ -10,7 +10,7 @@ route.use(AuthController.isLoggedIn)
 
 route.route('/').get(ViewController.indexPage)
 route.route('/shop').get(ViewController.getAllProducts)
-route.route('/product/:slug').get(AuthController.protect, ViewController.getOneProduct)
+route.route('/product/:slug').get( /*AuthController.protect,*/ ViewController.getOneProduct)
 route.route('/login').get(ViewController.login)
 route.route('/logout').get(ViewController.logout)
 route.route('/signup').get(ViewController.signup)

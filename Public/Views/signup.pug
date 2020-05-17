@@ -1,0 +1,29 @@
+extends base
+block body
+    main
+        form.form.login
+            h1 Signup to iCon
+            label(for='name')
+                p Name
+                .input-wrap
+                    i.fas.fa-user-alt
+                    input(type='text')
+            label(for='email')
+                p Email
+                .input-wrap
+                    i.fas.fa-user-alt
+                    input(type='text')
+            label(for='password')
+                p Password
+                .input-wrap
+                    i.fas.fa-key
+                    input(type='text')
+            label(for='confirmPassword')
+                p Confirm Password
+                .input-wrap
+                    i.fas.fa-key
+                    input(type='text')
+            button Signup
+            .link
+                | Already have account? 
+                a(href='/login') Signin

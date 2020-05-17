@@ -1,5 +1,6 @@
-var express = require('express')
 var path = require('path')
+var express = require('express')
+var exhbs = require('express-handlebars')
 var cookieparser = require('cookie-parser')
 var ViewRouter = require('./Routes/ViewRoutes')
 var UserRouter = require('./Routes/UserRoutes')
@@ -13,7 +14,7 @@ app.use(cookieparser())
 
 app.use(express.static(`${__dirname}/public/`))
 app.set('views', `${__dirname}/Public/views`)
-app.set('view engine', 'ejs')
+app.set('view engine', 'pug')
 
 app.use('/', ViewRouter)
 
@@ -35,7 +36,7 @@ app.use(ErrorController)
 
 
 var livereload = require('livereload').createServer({
-    exts: ['js', 'css', 'ejs']
+    exts: ['js', 'css', 'ejs', 'handlebars']
 });
 livereload.watch(`${__dirname}/public/views`);
 livereload.watch(`${__dirname}/public`);

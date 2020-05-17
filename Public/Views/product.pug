@@ -1,0 +1,44 @@
+extends base
+block body
+    main
+        #detail-wrap.flex-container
+            .images
+                img(src=`/images/${product.coverImage}.jpg` alt='' srcset='')
+                .more-images.flex-container
+                    each image in product.images
+                        img(src=`/images/${image}.jpg` alt='' srcset='')
+            .detail
+                h3 Apple&gt;Laptop
+                h1= product.name
+                div
+                    span.rating
+                        i.fas.fa-star.active
+                    span
+                    | #{product.avgRating}
+                h1 $#{product.price}
+                h3= product.summary
+                #quantity-wrap
+                    input#quantity(type='number' name='')
+                .buttons.flex-container
+                    button.add-to-cart
+                        i.fas.fa-shopping-basket
+                        | Add to Cart
+                    button.add-to-wishlist
+                        i.far.fa-heart
+                        | Save to Wishlist
+                p Get delivered in 2-4 business days.
+        #reviews-wrap
+            h1 Reviews
+            each review in product.reviews
+                .review.flex-container
+                    img(src=`/images/${review.user.photo}` alt='' srcset='')
+                    div
+                        h2.review-user-name= review.user.name
+                        span.rating
+                            i.fas.fa-star.active
+                        p= review.review
+            #add-review
+                form
+                    input(type='text' placeholder='review...')
+                    input(type='number' placeholder='rating')
+                    button Post Review

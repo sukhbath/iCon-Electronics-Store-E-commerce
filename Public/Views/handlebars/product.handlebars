@@ -1,0 +1,66 @@
+<main>
+    <div id="detail-wrap" class="flex-container">
+        <div class="images">
+            <img src="/images/<%=product.coverImage%>.jpg" alt="" srcset="">
+            <div class="more-images flex-container">
+                <% for( let i = 0; i < product.images.length; i++ ) { %>
+                <img src="/images/<%=product.images[i]%>.jpg" alt="" srcset="">
+                <% } %>
+            </div>
+        </div>
+        <div class="detail">
+            <h3>Apple>Laptop</h3>
+            <h1><%=product.name%></h1>
+            <div>
+                <span class="rating">
+                    <% for( let index = 0; index< 5; index++ ) { %>
+                    <i class="fas fa-star active"></i>
+                    <% } %>
+                </span>
+                <span>
+                    <%= product.avgRating %>/5
+                </span>
+            </div>
+            <h1>$<%=product.price%></h1>
+            <h3><%=product.summary%></h3>
+            <div id="quantity-wrap">
+                <input type="number" name="" id="quantity">
+            </div>
+            <div class="buttons flex-container">
+                <button class="add-to-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    Add to Cart
+                </button>
+                <button class="add-to-wishlist">
+                    <i class="far fa-heart"></i>
+                    Save to Wishlist
+                </button>
+            </div>
+            <p>Get delivered in 2-4 business days.</p>
+        </div>
+    </div>
+    <div id="reviews-wrap">
+        <h1>Reviews</h1>
+        <% for( let i = 0; i < product.reviews.length; i++ ) { %>
+        <div class="review flex-container">
+            <img src="/<%=product.reviews[i].user.photo%>" alt="" srcset="">
+            <div>
+                <h2 class="review-user-name"><%=product.reviews[i].user.name%></h2>
+                <span class="rating">
+                    <% for( let index = 0; index< 5; index++ ) { %>
+                    <i class="fas fa-star active"></i>
+                    <% } %>
+                </span>
+                <p><%=product.reviews[i].review%></p>
+            </div>
+        </div>
+        <% } %>
+        <div id="add-review">
+            <form>
+                <input type="text" placeholder="review...">
+                <input type="number" placeholder="rating">
+                <button>Post Review</button>
+            </form>
+        </div>
+    </div>
+</main>

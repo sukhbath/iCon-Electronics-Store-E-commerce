@@ -1,0 +1,19 @@
+extends base
+block body
+    main
+        h1 All Products
+        #all-products.flex-container
+            each product in products
+                .product
+                    img(src=`/images/${product.coverImage}.jpg` alt='')
+                    div
+                        h2.name= product.name
+                        .rating
+                            i.fas.fa-star.active
+                        .flex-container
+                            h2.price $#{product.price} 
+                            h2
+                                a(href=`/product/${product.slug}`) View
+                        h2.add-to-cart
+                            i.fas.fa-shopping-basket
+                            | Add to Cart

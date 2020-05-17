@@ -39,6 +39,7 @@ exports.signup = CatchError(async (request, response, next) => {
 
 
 exports.login = CatchError(async (request, response, next) => {
+    console.log(request.body)
     var {
         email,
         password
@@ -50,7 +51,7 @@ exports.login = CatchError(async (request, response, next) => {
     }).select("+password")
 
 
-    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 400))
+    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 404))
 
     sendToken(user, 201, "User Logged in", response)
 
@@ -105,9 +106,16 @@ exports.isLoggedIn = CatchError(async (request, response, next) => {
             var data = await varify(token, process.env.SALT)
 
             var user = await UserModel.findById(data.id)
-            if (!user) return next()
+            if (!user) {
+                response.locals.user = null
+                return next()
+            }
 
-            if (user.hasChangedPassword(data.iat)) return next()
+            if (user.hasChangedPassword(data.iat)) {
+                response.locals.user = null
+                return next()
+            }
+
 
             response.locals.user = user
             request.user = user
