@@ -45,45 +45,28 @@
                 </div>
             </div>
     </header>
-    <!-- 
-
-
-
- -->
-
-    <!-- here -->
     <main>
-        <h1>All Products</h1>
-        <div id="all-products" class="flex-container">
-            <% for ( let i = 0; i < products.length; i++ ) { %>
-            <div class="product">
-                <img src='/images/<%= products[i].coverImage%>.jpg' alt="">
-                <div>
-                    <h2 class="name"><%- products[i].name %> </h2>
-                    <div class="rating">
-                        <%= Math.round(products[i].avgRating) %>
-                        <% for( let index = 0; index< 5; index++ ) { %>
-                        <i class="fas fa-star active"></i>
-                        <% } %>
-                    </div>
-                    <div class="flex-container">
-                        <h2 class="price">$<%- products[i].price %> </h2>
-                        <h2>
-                            <a href="/product/<%= products[i].slug%>">View</a>
-                        </h2>
-                    </div>
-                    <h2 class="add-to-cart">
-                        <i class="fas fa-shopping-basket"></i>
-                        Add to Cart
-                    </h2>
+        <form class="form login">
+            <h1>Signin to iCon</h1>
+            <label for="email">
+                <p>Email</p>
+                <div class="input-wrap">
+                    <i class="fas fa-user-alt"></i>
+                    <input type="text">
                 </div>
-            </div>
-            <% } %>
-        </div>
+            </label>
+            <label for="password">
+                <p>Password</p>
+                <div class="input-wrap">
+                    <i class="fas fa-key"></i>
+                    <input type="text">
+                </div>
+            </label>
+            <div class="link"><a href="/forgetPassword"> Forget Password</a></div>
+            <button>Login</button>
+            <div class="link">Do not have account? <a href="/signup">Signup</a></div>
+        </form>
     </main>
-
-
-
 </body>
 
 </html>
