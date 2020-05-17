@@ -44,3 +44,16 @@ exports.deleteCartProduct = CatchError(async (request, response, next) => {
         }
     })
 })
+
+exports.getUserCart = CatchError(async (request, response, next) => {
+    var cartProducts = await CartModel.find({
+        user: request.params.userId
+    })
+    response.status(200).send({
+        status: "success",
+        length: cartProducts.length,
+        data: {
+            cartProducts
+        }
+    })
+})

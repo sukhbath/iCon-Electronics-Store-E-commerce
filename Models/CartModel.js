@@ -32,7 +32,7 @@ var CartSchema = new mongoose.Schema({
     },
 })
 
-CartSchema.createIndex({
+CartSchema.index({
     user: 1,
     product: 1
 }, {
