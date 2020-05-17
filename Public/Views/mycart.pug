@@ -1,0 +1,40 @@
+extends base
+block append head
+    script(src="/js/mycart.js" defer)
+block body
+    main
+        h2.centre My Cart
+        h2.centre= cartProducts
+        #cart-products
+            each cartproduct in cartProducts
+                .cart-product.flex-container
+                    img(src=`/images/${cartproduct.product.coverImage}.jpg`, alt="alt")
+                    .detail
+                        h3.name= cartproduct.product.name
+                    .quantity
+                        p= cartproduct.quantity
+                    .price
+                        h3= cartproduct.product.
+                    .remove-btn
+                        <i class="fas fa-times"></i>
+                .cart-product.flex-container
+                    img(src="/default.jpg", alt="alt")
+                    .detail
+                        h3.name Apple Macbook
+                    .quantity
+                        p 2
+                    .price
+                        h3 $300
+                    .remove-btn
+                        <i class="fas fa-times"></i>
+                .cart-product.flex-container
+                    img(src="/default.jpg", alt="alt")
+                    .detail
+                        h3.name Apple Macbook
+                    .quantity
+                        p 2
+                    .price
+                        h3 $300
+                    .remove-btn
+                        <i class="fas fa-times"></i>
+                    

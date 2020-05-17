@@ -46,13 +46,13 @@ exports.login = CatchError(async (request, response, next) => {
         password
     } = request.body
 
-    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 200))
+    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 400))
     var user = await UserModel.findOne({
         email
     }).select("+password")
 
 
-    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 200))
+    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email or password", 404))
 
     sendToken(user, 201, "User Logged in", response)
 
@@ -64,7 +64,7 @@ exports.login = CatchError(async (request, response, next) => {
 
 exports.logout = CatchError(async (request, response, next) => {
     response.cookie("jwt", 'logged out', {
-        expires: Date.now() + 1000 * 10
+        expires: new Date(Date.now() + 900000)
     })
     response.send({
         status: "success",

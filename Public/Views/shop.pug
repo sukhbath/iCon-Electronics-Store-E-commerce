@@ -9,10 +9,14 @@ block body
                     div
                         h2.name= product.name
                         .rating
-                            i.fas.fa-star.active
+                            - for (var x = 0; x < 5; x++)
+                                if x < Math.round(product.avgRating)
+                                    i.fas.fa-star.active 
+                                else
+                                    i.fas.fa-star 
                         .flex-container
                             h2.price $#{product.price} 
-                            h2
+                            h2.view
                                 a(href=`/product/${product.slug}`) View
                         h2.add-to-cart
                             i.fas.fa-shopping-basket

@@ -10,6 +10,7 @@ header.flex-container
     #wish-cart-btn
       i.fas.fa-heart
     #product-cart-btn
+     a(href='/mycart') 
       i.fas.fa-shopping-cart
     #user-btn.drop-down
       #current-user.flex-container
@@ -20,8 +21,9 @@ header.flex-container
           a(href='/login') Login
       .drop-down-content
         if user
-          a(href='/me') Profile
-          a(href='/logout') Logout
+          div 
+            a(href='/me') Profile
+            a(class='logout-btn') Logout
         else
           a(href='/signup') Signup
         

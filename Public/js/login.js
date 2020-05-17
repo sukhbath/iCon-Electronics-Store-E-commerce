@@ -10,6 +10,6 @@ document.querySelector('.form.login').addEventListener('submit', async function 
         })
         alert('Successfully logged in')
     } catch (error) {
-        console.log(response)
+        alert(error.response.data.message)
     }
 })

@@ -12,9 +12,13 @@ block body
                 h1= product.name
                 div
                     span.rating
-                        i.fas.fa-star.active
+                        - for (var x = 0; x < 5; x++)
+                            if x < Math.round(product.avgRating)
+                                i.fas.fa-star.active 
+                            else
+                                i.fas.fa-star 
                     span
-                    | #{product.avgRating}
+                    | #{product.avgRating}/5.0
                 h1 $#{product.price}
                 h3= product.summary
                 #quantity-wrap
