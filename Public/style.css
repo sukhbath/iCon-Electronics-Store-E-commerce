@@ -51,7 +51,7 @@ header {
 }
 
 header .logo img {
-    width: 5rem;
+    width: 7rem;
     object-fit: cover;
     /* background: red; */
     height: 2rem;
@@ -64,7 +64,7 @@ header a {
     padding: .5rem;
 }
 
-nav a::after {
+nav a:not(.logo)::after {
     position: absolute;
     top: 100%;
     left: 0;

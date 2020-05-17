@@ -57,8 +57,12 @@ exports.me = async function (request, response, next) {
     })
 }
 
-
-
+exports.forgetPassword = async function (request, response, next) {
+    // var me = await UserModel.findById(request.user.id)
+    // response.render('forgetPassword', {
+    //     me
+    // })
+}
 
 exports.updateMe = async function (request, response, next) {
     var me = await UserModel.findByIdAndUpdate(request.user.id, request.body)

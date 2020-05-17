@@ -1,28 +1,30 @@
 extends base
+block append head
+    script(src="/js/signup.js" defer)
 block body
     main
-        form.form.login
+        form.form.signup
             h1 Signup to iCon
             label(for='name')
                 p Name
                 .input-wrap
                     i.fas.fa-user-alt
-                    input(type='text')
+                    input(type='text' id="name")
             label(for='email')
                 p Email
                 .input-wrap
                     i.fas.fa-user-alt
-                    input(type='text')
+                    input(type='text' id="email")
             label(for='password')
                 p Password
                 .input-wrap
                     i.fas.fa-key
-                    input(type='text')
+                    input(type='text' id="password")
             label(for='confirmPassword')
                 p Confirm Password
                 .input-wrap
                     i.fas.fa-key
-                    input(type='text')
+                    input(type='text' id="confirmPassword")
             button Signup
             .link
                 | Already have account? 

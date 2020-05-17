@@ -5,15 +5,17 @@ document.querySelector('.form.signup').addEventListener('submit', async function
     var password = document.querySelector('.form.signup #password').value
     var confirmPassword = document.querySelector('.form.signup #confirmPassword').value
     var response;
-    try {
-        response = await axios.post('/api/v1/users/signup', {
-            name,
-            email,
-            password,
-            confirmPassword
-        })
-        alert('Successfully logged in')
-    } catch (error) {
-        console.log(response)
-    }
+    // try {
+    response = await axios.post('/api/v1/users/signup', {
+        name,
+        email,
+        password,
+        confirmPassword
+    })
+    console.log(response)
+    alert('Successfully logged in')
+    // }
+    // catch (error) {
+    //     console.log(response)
+    // }
 })

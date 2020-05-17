@@ -29,6 +29,7 @@ function sendToken(user, statusCode, message, response) {
 
 
 exports.signup = CatchError(async (request, response, next) => {
+    console.log('signup')
     var user = await UserModel.create(request.body)
     SendEmail("Welcome, account created.")
     sendToken(user, 201, "User Signed up", response)
@@ -45,13 +46,13 @@ exports.login = CatchError(async (request, response, next) => {
         password
     } = request.body
 
-    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 400))
+    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 200))
     var user = await UserModel.findOne({
         email
     }).select("+password")
 
 
-    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 404))
+    if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email & password", 200))
 
     sendToken(user, 201, "User Logged in", response)
 
