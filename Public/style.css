@@ -50,8 +50,11 @@ header {
     background: #253dd5;
 }
 
-header img {
-    width: 2rem;
+header .logo img {
+    width: 5rem;
+    object-fit: cover;
+    /* background: red; */
+    height: 2rem;
 }
 
 header a {
@@ -136,12 +139,11 @@ header .buttons i {
     background: #00ba93;
     padding: .5rem 1.5rem;
     border-radius: 50px;
-
-
 }
 
 #user-btn img {
     border-radius: 50%;
+    width: 2rem;
 }
 
 #user-btn .user-name {

@@ -36,7 +36,7 @@ app.use(ErrorController)
 
 
 var livereload = require('livereload').createServer({
-    exts: ['js', 'css', 'ejs', 'handlebars']
+    exts: ['js', 'css', 'pug']
 });
 livereload.watch(`${__dirname}/public/views`);
 livereload.watch(`${__dirname}/public`);

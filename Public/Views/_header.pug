@@ -14,12 +14,14 @@ header.flex-container
     #user-btn.drop-down
       #current-user.flex-container
         if user
-          img(src='default.jpg' alt='')
+          img(src='/default.jpg' alt='')
           span.user-name Sukh
         else
           a(href='/login') Login
       .drop-down-content
-        a(href='/me') Profile
         if user
+          a(href='/me') Profile
           a(href='/logout') Logout
-        a(href='/signup') Signup
+        else
+          a(href='/signup') Signup
+        
