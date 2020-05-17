@@ -40,6 +40,15 @@ CartSchema.index({
 })
 
 
+CartSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: "product",
+        select: "name slug coverImage"
+    })
+    next()
+})
+
+
 var CartModel = mongoose.model('Carts', CartSchema)
 
 module.exports = CartModel

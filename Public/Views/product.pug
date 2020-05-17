@@ -1,4 +1,6 @@
 extends base
+block append head
+    script(src="/js/product.js" defer)
 block body
     main
         #detail-wrap.flex-container
@@ -24,7 +26,7 @@ block body
                 #quantity-wrap
                     input#quantity(type='number' name='')
                 .buttons.flex-container
-                    button.add-to-cart
+                    button.add-to-cart(data-cart-product-id=`${product.id}`)
                         i.fas.fa-shopping-basket
                         | Add to Cart
                     button.add-to-wishlist

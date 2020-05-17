@@ -69,10 +69,17 @@ exports.updateMe = async function (request, response, next) {
 
 
 exports.getAllCartProducts = async function (request, response, next) {
-    var cartProducts = await CartModel.find().populate({
-        path: "product",
-        select: "name coverImage slug",
-    })
+    console.log('i aj=m invoked')
+    var cartProducts = await CartModel.find({
+        user: request.user.id
+    }).populate("product")
+
+    console.log(cartProducts)
+    // {
+    //     path: "product",
+    //     select: "name slug coverImage"
+    // }
+
     response.render('mycart', {
         cartProducts
     })

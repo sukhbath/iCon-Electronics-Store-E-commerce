@@ -14,7 +14,7 @@ route.route('/product/:slug').get( /*AuthController.protect,*/ ViewController.ge
 route.route('/login').get(ViewController.login)
 route.route('/signup').get(ViewController.signup)
 route.route('/forgetPassword').get(ViewController.forgetPassword)
-route.route('/mycart').get(ViewController.getAllCartProducts)
+route.route('/mycart').get(AuthController.protect, ViewController.getAllCartProducts)
 
 route.route('/updateMe').post(ViewController.updateMe)
 

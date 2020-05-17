@@ -2,7 +2,9 @@ var CartModel = require('../Models/CartModel')
 var CatchError = require('../Utils/CatchError')
 
 exports.getAllCartProducts = CatchError(async (request, response, next) => {
-    var cartProducts = await CartModel.find()
+    var cartProducts = await CartModel.find({
+        user: request.user.id
+    })
     response.status(201).send({
         status: "success",
         length: cartProducts.length,
@@ -13,7 +15,10 @@ exports.getAllCartProducts = CatchError(async (request, response, next) => {
 })
 
 exports.addToCart = CatchError(async (request, response, next) => {
-    var cartProduct = await CartModel.create(request.body)
+    var cartProduct = await CartModel.create({
+        user: request.user.id,
+        product: request.body.product
+    })
     response.status(201).send({
         status: "success",
         message: "Product Added",
@@ -41,19 +46,6 @@ exports.deleteCartProduct = CatchError(async (request, response, next) => {
         status: "success",
         data: {
             cartProduct
-        }
-    })
-})
-
-exports.getUserCart = CatchError(async (request, response, next) => {
-    var cartProducts = await CartModel.find({
-        user: request.params.userId
-    })
-    response.status(200).send({
-        status: "success",
-        length: cartProducts.length,
-        data: {
-            cartProducts
         }
     })
 })
