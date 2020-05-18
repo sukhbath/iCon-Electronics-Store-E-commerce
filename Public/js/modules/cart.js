@@ -11,8 +11,21 @@ async function removeFromCart(id) {
     }
 }
 
+async function addToCart(id) {
+    try {
+        var response = await axios.post(`/api/v1/cart`, {
+            product: id
+        });
+        console.log(response)
+
+    } catch (error) {
+
+        console.log(error.response)
+    }
+}
 
 
 export {
-    removeFromCart
+    removeFromCart,
+    addToCart
 }

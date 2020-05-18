@@ -23,7 +23,7 @@ var UserSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        default: "default.jpg"
+        default: "default-user.png"
     },
     age: {
         type: Number,

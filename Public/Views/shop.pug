@@ -1,4 +1,6 @@
 extends base
+block append head
+    script(src="/js/shop.js" type="module" defer)
 block body
     main
         h1 All Products
@@ -18,6 +20,6 @@ block body
                             h2.price $#{product.price} 
                             h2.view
                                 a(href=`/product/${product.slug}`) View
-                        h2.add-to-cart
+                        h2.add-to-cart(data-cart-product-id=`${product.id}`)
                             i.fas.fa-shopping-basket
                             | Add to Cart

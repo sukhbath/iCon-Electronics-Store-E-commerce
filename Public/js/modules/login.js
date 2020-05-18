@@ -13,7 +13,7 @@ async function login() {
         })
         showAlertBox('Successfully logged in', false)
         setTimeout(() => {
-            window.location.reprelace('/')
+            window.location.replace('/')
         }, 2000);
     } catch (error) {
         showAlertBox(error.response.data.message)

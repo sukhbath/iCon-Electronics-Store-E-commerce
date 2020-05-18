@@ -1,6 +1,6 @@
 extends base
 block append head
-    script(src="/js/product.js" defer)
+    script(src="/js/product.js" type="module" defer)
 block body
     main
         #detail-wrap.flex-container
@@ -19,8 +19,9 @@ block body
                                 i.fas.fa-star.active 
                             else
                                 i.fas.fa-star 
+                        
                     span
-                    | #{product.avgRating}/5.0
+                    | #{product.avgRating}/5.0  by #{product.qtyRatings} people
                 h1 $#{product.price}
                 h3= product.summary
                 #quantity-wrap
@@ -37,14 +38,21 @@ block body
             h1 Reviews
             each review in product.reviews
                 .review.flex-container
-                    img(src=`/images/${review.user.photo}` alt='' srcset='')
+                    img(src=`/images/users/${review.user.photo}` alt='' srcset='')
                     div
                         h2.review-user-name= review.user.name
                         span.rating
-                            i.fas.fa-star.active
+                            - for (var x = 0; x < 5; x++)
+                                if x < Math.round(review.rating)
+                                    i.fas.fa-star.active 
+                                else
+                                    i.fas.fa-star
                         p= review.review
             #add-review
-                form
-                    input(type='text' placeholder='review...')
-                    input(type='number' placeholder='rating')
-                    button Post Review
+                form#add-review-form(data-cart-product-id=`${product.id}`)
+                    input(type='text' placeholder='review...' id="review")
+                    input(type='number' placeholder='rating' id="rating")
+                    button#post-review Post Review
+
+
+

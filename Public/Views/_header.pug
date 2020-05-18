@@ -15,7 +15,7 @@ header.flex-container
     #user-btn.drop-down
       #current-user.flex-container
         if user
-          img(src='/default.jpg' alt='')
+          img(src=`/images/users/${user.photo}` alt='')
           span.user-name= user.name
         else
           a(href='/login') Login

@@ -170,6 +170,8 @@ header .buttons i {
 #user-btn img {
     border-radius: 50%;
     width: 2rem;
+    height: 2rem;
+    object-fit: cover;
 }
 
 #user-btn .user-name {
@@ -273,18 +275,21 @@ main {
 }
 
 .product .rating,
-#detail-wrap .rating {
+#detail-wrap .rating,
+#reviews-wrap .rating {
     color: #e0e0e0;
 }
 
 .product .rating i,
-#detail-wrap .rating i {
+#detail-wrap .rating i,
+#reviews-wrap .rating i {
     margin: 0 .3rem;
 }
 
 
 .product .rating .active,
-#detail-wrap .rating .active {
+#detail-wrap .rating .active,
+#reviews-wrap .rating .active {
     color: #fcb332;
 }
 
@@ -344,6 +349,30 @@ main {
     color: #00ba93;
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+
+#image-input {
+    background: red;
+    display: none;
+}
+
+#image-label {
+    background: red;
+    width: 5rem;
+    height: 5rem;
+    margin: auto;
+    border-radius: 50px;
+}
+
+#image-label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+    background: red;
+    padding: .1rem;
+
 }
 
 

@@ -26,18 +26,18 @@ function sendToken(user, statusCode, message, response) {
     })
 }
 
-
-
 exports.signup = CatchError(async (request, response, next) => {
-    console.log('signup')
+    if (request.file) {
+        request.body.photo = request.file.filename
+    } else {
+        request.body.photo = "default-user.png"
+
+    }
+    console.log(request.body)
     var user = await UserModel.create(request.body)
     SendEmail("Welcome, account created.")
     sendToken(user, 201, "User Signed up", response)
 })
-
-
-
-
 
 exports.login = CatchError(async (request, response, next) => {
     console.log(request.body)
@@ -55,8 +55,6 @@ exports.login = CatchError(async (request, response, next) => {
     if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email or password", 404))
 
     sendToken(user, 201, "User Logged in", response)
-
-
 })
 
 
