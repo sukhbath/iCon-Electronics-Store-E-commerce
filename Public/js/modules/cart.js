@@ -1,13 +1,13 @@
 import {
-    showNotifyBox
+    showAlertBox
 }
-from './notify.js'
+from './alert.js'
 async function removeFromCart(id) {
     try {
         var response = await axios.delete(`/api/v1/cart/${id}`);
         window.location.reload()
     } catch (error) {
-        showNotifyBox(error.response)
+        showAlertBox(error.response)
     }
 }
 
@@ -20,7 +20,7 @@ async function addToCart(id) {
 
     } catch (error) {
 
-        console.log(error.response)
+        showAlertBox(error.response.data.message)
     }
 }
 

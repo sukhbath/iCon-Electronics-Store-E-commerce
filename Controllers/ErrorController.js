@@ -11,12 +11,30 @@ var validationError = function (error) {
 
 
 var DuplicateError = function (error) {
-    var text = error.errmsg.match(/\{([^}]+)\}/ig)[0].replace(/{/ig, "").replace(/}/ig, "")
-    myerror = new CustomError(`Alredy exist ${text}`, 400)
+    var text = "";
+    var message;
+
+    for (const key in error.keyValue) {
+        text += key + ' '
+    }
+
+    if (text.includes('user product')) {
+        message = 'Product is already in cart'
+    } else if (text.includes('product user')) {
+        message = 'You can not add more than one review'
+    } else {
+        message = `${text} Alredy exist`
+    }
+
+    myerror = new CustomError(message, 400)
     return myerror
 }
 
 
+var IndexError = function (error) {
+    myerror = new CustomError(`Alredy exist`, 400)
+    return myerror
+}
 
 module.exports = (error, request, response, next) => {
     console.log("error middlwwawre")
@@ -28,6 +46,7 @@ module.exports = (error, request, response, next) => {
     } else {
         myerror = error
     }
+
     console.log(error)
 
     if (request.originalUrl.startsWith("/api")) {

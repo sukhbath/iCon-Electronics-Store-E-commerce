@@ -1,3 +1,8 @@
+import {
+    showAlertBox
+} from './alert.js';
+
+
 async function addReview(id) {
     var review = document.getElementById('review').value
     var rating = document.getElementById('rating').value
@@ -10,7 +15,7 @@ async function addReview(id) {
         })
         console.log(response)
     } catch (error) {
-        console.log(error.response)
+        showAlertBox(error.response.data.message)
 
     }
 }
