@@ -1,11 +1,14 @@
 extends base
-block append head
-    script(src="/js/me.js" type="module" defer)
 block body
     main
+        h1.heading.centre My Profile
+        #profile
+            img(src=`images/users/${user.photo}`, alt="", srcset="")
+            h2.email= user.email
+            h1.name= user.name
         #updateMe
+            h2 Update Information
             form.form#updateMe-form
-                h1 Update Information
                 label(for='image-input' id='image-label')
                     img(src=`/images/users/${user.photo}`, id="selected-image")
                     input(type='file' id="image-input")
@@ -20,4 +23,6 @@ block body
                         i.fas.fa-key
                         input#name(type='text' value=`${user.name}`)
                 button#login-btn Update Info
-                a(href="/resetPassword") Reset Password
+        a(href="/updatePassword")#reset-password-link
+            | Update Password 
+            i(class="fas fa-undo")

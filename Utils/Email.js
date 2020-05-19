@@ -1,11 +1,14 @@
 var nodemailer = require('nodemailer');
+var pug = require('pug');
+
+
 
 class Email {
-    constructor() {}
+    constructor(view) {
+        this.view = view
+    }
 
-
-
-    sendMail() {
+    setTransporter() {
         var env = 'dev'
         if (env == 'dev') {
             this.transporter = nodemailer.createTransport({
@@ -16,15 +19,25 @@ class Email {
                     pass: "c8ccfa4a0fa7d7"
                 }
             });
-
-            this.mailOptions = {
-                from: 'electronicStore@gmail.com',
-                to: 'myfriend@yahoo.com',
-                subject: 'Sending Email using Node.js',
-                html: 'ok'
-            };
         }
+    }
 
+    setMailOptions(html) {
+        this.mailOptions = {
+            from: 'electronicStore@gmail.com',
+            to: this.user.email,
+            subject: 'Sending Email using Node.js',
+            html
+        };
+    }
+
+    sendMail() {
+
+        var html = pug.renderFile(`${__dirname}/../Public/Views/email/${this.view}.pug`, {
+            name: this.user.name
+        })
+        this.setMailOptions(html)
+        this.setTransporter()
         this.transporter.sendMail(this.mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
@@ -35,7 +48,9 @@ class Email {
     }
 
 
-    sendWelcomeEmail() {
+    sendWelcomeEmail(user) {
+        this.view = 'welcome'
+        this.user = user
         this.sendMail()
     }
 
@@ -43,4 +58,7 @@ class Email {
 }
 
 var email = new Email()
-email.sendWelcomeEmail()
+email.sendWelcomeEmail({
+    email: 'merijaan@mail.com',
+    name: "jaan"
+})

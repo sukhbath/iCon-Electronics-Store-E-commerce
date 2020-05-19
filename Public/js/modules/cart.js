@@ -2,6 +2,7 @@ import {
     showAlertBox
 }
 from './alert.js'
+
 async function removeFromCart(id) {
     try {
         var response = await axios.delete(`/api/v1/cart/${id}`);

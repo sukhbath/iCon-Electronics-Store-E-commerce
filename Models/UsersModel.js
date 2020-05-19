@@ -65,7 +65,7 @@ var UserSchema = new mongoose.Schema({
     },
     passwordChangedAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     }
 }, {
     toJSON: {
@@ -77,13 +77,9 @@ var UserSchema = new mongoose.Schema({
 })
 
 UserSchema.virtual("cart", {
-    ref: 'Carts', // The model to use
-    localField: '_id', // Find people where `localField`
+    ref: 'Carts',
+    localField: '_id',
     foreignField: 'user'
-    // // 
-    // ref: "Carts",
-    // foreignField: "user",
-    // localField: '_id'
 })
 
 UserSchema.pre(/^find/, function (next) {
@@ -92,18 +88,14 @@ UserSchema.pre(/^find/, function (next) {
 })
 
 
-
 UserSchema.pre("save", function (next) {
     if (this.isModified('password')) {
         this.password = passwordHash.generate(this.password)
         this.confirmPassword = undefined
-        this.passwordChangedAt = Date.now() - 1000
+        this.passwordChangedAt = Date.now() - 5000
     }
     next()
 })
-
-
-
 
 
 

@@ -4,7 +4,7 @@ var CartModel = require('../Models/CartModel')
 
 exports.indexPage = async function (request, response, next) {
     var products = await ProductModel.find()
-    response.render("welcome", {
+    response.render("index", {
         products
     })
 }
@@ -93,4 +93,8 @@ exports.forgetPassword = async function (request, response, next) {
 
 exports.resetPassword = async function (request, response, next) {
     response.render("resetPassword")
+}
+
+exports.updatePassword = async function (request, response, next) {
+    response.render("updatePassword")
 }

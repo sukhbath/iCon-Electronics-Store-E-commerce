@@ -35,7 +35,6 @@ exports.signup = CatchError(async (request, response, next) => {
 
     console.log(request.body)
     var user = await UserModel.create(request.body)
-    SendEmail("Welcome, account created.")
     sendToken(user, 201, "User Signed up", response)
 })
 
@@ -128,6 +127,24 @@ exports.isLoggedIn = CatchError(async (request, response, next) => {
 
 
 exports.updatePassword = CatchError(async (request, response, next) => {
+    var {
+        oldPassword,
+        password,
+        confirmPassword
+    } = request.body
+
+    // if (!oldPassword || !password || !confirmPassword) return next(new CustomError("Please provide all fields", 400))
+
+    var user = await UserModel.findById(request.user.id).select('+password')
+
+    if (!user.isCorrectPassword(oldPassword, user.password)) return next(new CustomError("Old password does not match", 400))
+
+    user.password = password;
+    user.confirmPassword = confirmPassword
+    await user.save()
+
+    sendToken(user, 201, 'Password has been successfully updated', response)
+
 
 })
 

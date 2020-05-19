@@ -1,6 +1,4 @@
 extends base
-block append head
-    script(src="/js/product.js" type="module" defer)
 block body
     main
         #detail-wrap.flex-container
@@ -44,7 +42,9 @@ block body
                 .review.flex-container
                     img(src=`/images/users/${review.user.photo}` alt='' srcset='')
                     div
-                        h2.review-user-name= review.user.name
+                        div.flex-container.name-time
+                            h2= review.user.name
+                            p.review-time= review.createdAt.toDateString()
                         span.rating
                             - for (var x = 0; x < 5; x++)
                                 if x < Math.round(review.rating)
