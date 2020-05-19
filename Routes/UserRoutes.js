@@ -17,6 +17,7 @@ router.post('/forgetPassword', AuthController.forgetPassword)
 router.patch('/resetPassword/:tempPassword', AuthController.resetPassword)
 
 router.get('/me', AuthController.protect, UserController.getMe)
+router.post('/updateMe', AuthController.protect, AuthController.updateMe)
 router.route("/").get(UserController.getAllUsers).post(UserController.createUser)
 router.route("/:id").get(UserController.getOneUser).patch(UserController.updateUser).delete(UserController.deleteUser)
 

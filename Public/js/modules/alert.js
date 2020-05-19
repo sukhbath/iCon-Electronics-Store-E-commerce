@@ -8,6 +8,7 @@
      setTimeout(() => {
          alertBox.textContent = ''
          alertBox.style.top = "-100%"
+         alertBox.style.background = '#3fec6a'
      }, 2500);
  }
 

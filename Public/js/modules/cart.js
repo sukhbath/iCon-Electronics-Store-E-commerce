@@ -17,9 +17,9 @@ async function addToCart(id) {
             product: id
         });
         console.log(response)
-
+        var cartQty = document.getElementById('cart-qty')
+        cartQty.textContent = 1 * (cartQty.textContent) + 1
     } catch (error) {
-
         showAlertBox(error.response.data.message)
     }
 }

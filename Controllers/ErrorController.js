@@ -21,7 +21,7 @@ var DuplicateError = function (error) {
     if (text.includes('user product')) {
         message = 'Product is already in cart'
     } else if (text.includes('product user')) {
-        message = 'You can not add more than one review'
+        message = 'You have already added review'
     } else {
         message = `${text} Alredy exist`
     }
@@ -31,8 +31,13 @@ var DuplicateError = function (error) {
 }
 
 
-var IndexError = function (error) {
-    myerror = new CustomError(`Alredy exist`, 400)
+// var IndexError = function (error) {
+//     myerror = new CustomError(`Alredy exist`, 400)
+//     return myerror
+// }
+
+var LoginError = function (error) {
+    myerror = new CustomError(`Please Login to get access`, 400)
     return myerror
 }
 
@@ -43,6 +48,8 @@ module.exports = (error, request, response, next) => {
         myerror = validationError(error)
     } else if (error.code == 11000) {
         myerror = DuplicateError(error)
+    } else if (error.name == 'JsonWebTokenError') {
+        myerror = LoginError(error)
     } else {
         myerror = error
     }

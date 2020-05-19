@@ -1,31 +1,46 @@
 var nodemailer = require('nodemailer');
 
-module.exports = function (message) {
+class Email {
+    constructor() {}
 
 
-    var transporter = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-            user: "57ad37dcff662d",
-            pass: "c8ccfa4a0fa7d7"
+
+    sendMail() {
+        var env = 'dev'
+        if (env == 'dev') {
+            this.transporter = nodemailer.createTransport({
+                host: "smtp.mailtrap.io",
+                port: 2525,
+                auth: {
+                    user: "57ad37dcff662d",
+                    pass: "c8ccfa4a0fa7d7"
+                }
+            });
+
+            this.mailOptions = {
+                from: 'electronicStore@gmail.com',
+                to: 'myfriend@yahoo.com',
+                subject: 'Sending Email using Node.js',
+                html: 'ok'
+            };
         }
-    });
 
-    var mailOptions = {
-        from: 'electronicStore@gmail.com',
-        to: 'myfriend@yahoo.com',
-        subject: 'Sending Email using Node.js',
-        text: message
-    };
+        this.transporter.sendMail(this.mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
 
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    sendWelcomeEmail() {
+        this.sendMail()
+    }
+
 
 }
+
+var email = new Email()
+email.sendWelcomeEmail()

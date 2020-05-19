@@ -38,8 +38,6 @@ exports.getMe = CatchError(async function (request, response, next) {
     })
 })
 
-
-
 exports.getAllUsers = CatchError(async function (request, response, next) {
     var users = await UserModel.find()
     response.status(200).send({

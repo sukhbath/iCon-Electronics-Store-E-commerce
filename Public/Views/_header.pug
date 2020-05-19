@@ -7,11 +7,13 @@ header.flex-container
     a(href='/shop') All
     a(href='#') About
   .buttons.flex-container
-    #wish-cart-btn
-      i.fas.fa-heart
-    #product-cart-btn
-     a(href='/mycart') 
-      i.fas.fa-shopping-cart
+    if user
+      //- #wish-cart-btn
+      //-   i.fas.fa-heart
+      #product-cart-btn
+        a(href='/mycart') 
+          i.fas.fa-shopping-cart
+          div#cart-qty= user.cart.length
     #user-btn.drop-down
       #current-user.flex-container
         if user

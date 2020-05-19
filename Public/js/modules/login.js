@@ -11,12 +11,12 @@ async function login() {
             email,
             password
         })
-        showAlertBox('Successfully logged in', false)
+        showAlertBox('Successfully logged in')
         setTimeout(() => {
             window.location.replace('/')
         }, 2000);
     } catch (error) {
-        showAlertBox(error.response.data.message)
+        showAlertBox(error.response.data.message, true)
     }
 }
 

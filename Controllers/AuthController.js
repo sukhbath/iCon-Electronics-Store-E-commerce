@@ -31,8 +31,8 @@ exports.signup = CatchError(async (request, response, next) => {
         request.body.photo = request.file.filename
     } else {
         request.body.photo = "default-user.png"
-
     }
+
     console.log(request.body)
     var user = await UserModel.create(request.body)
     SendEmail("Welcome, account created.")
@@ -84,7 +84,6 @@ exports.protect = CatchError(async (request, response, next) => {
 
     var varify = utils.promisify(jwt.verify)
     var data = await varify(token, process.env.SALT)
-
     var user = await UserModel.findById(data.id)
     if (!user) return next(new CustomError("This user does'nt exist now.🔑", 401))
 
@@ -155,6 +154,7 @@ exports.forgetPassword = CatchError(async (request, response, next) => {
 
 
 exports.resetPassword = CatchError(async (request, response, next) => {
+    console.log('request.params.tempPassword')
     var tempPassword = request.params.tempPassword
     var hashedtempPassword = crypto
         .createHash("sha256")
@@ -179,4 +179,27 @@ exports.resetPassword = CatchError(async (request, response, next) => {
     sendToken(user, 200, "Password has been reset", response)
 
 
+})
+
+
+exports.updateMe = CatchError(async (request, response, next) => {
+
+    if (request.file) {
+        request.body.photo = request.file.filename
+    } else {
+        request.body.photo = request.user.photo
+    }
+    console.log('request.bod')
+    console.log(request.body)
+
+
+    var user = await UserModel.findByIdAndUpdate(request.user.id, request.body, {
+        validateBeforeSave: true,
+        new: true
+    })
+    response.send({
+        status: "success",
+        message: "Information updated",
+        user
+    })
 })

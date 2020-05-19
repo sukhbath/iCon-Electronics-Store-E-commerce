@@ -1,0 +1,23 @@
+extends base
+block append head
+    script(src="/js/me.js" type="module" defer)
+block body
+    main
+        #updateMe
+            form.form#updateMe-form
+                h1 Update Information
+                label(for='image-input' id='image-label')
+                    img(src=`/images/users/${user.photo}`, id="selected-image")
+                    input(type='file' id="image-input")
+                label(for='email')
+                    p Email
+                    .input-wrap
+                        i.fas.fa-user-alt
+                        input#email(type='text' value=`${user.email}`)
+                label(for='name')
+                    p Name
+                    .input-wrap
+                        i.fas.fa-key
+                        input#name(type='text' value=`${user.name}`)
+                button#login-btn Update Info
+                a(href="/resetPassword") Reset Password

@@ -13,9 +13,9 @@ async function addReview(id) {
             rating,
             product: id,
         })
-        console.log(response)
+        window.location.reload()
     } catch (error) {
-        showAlertBox(error.response.data.message)
+        showAlertBox(error.response.data.message, true)
 
     }
 }

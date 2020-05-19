@@ -3,7 +3,7 @@ block append head
     script(src="/js/shop.js" type="module" defer)
 block body
     main
-        h1 All Products
+        h1.heading All Products
         #all-products.flex-container
             each product in products
                 .product
@@ -18,8 +18,9 @@ block body
                                     i.fas.fa-star 
                         .flex-container
                             h2.price $#{product.price} 
-                            h2.view
+                            p.view
                                 a(href=`/product/${product.slug}`) View
                         h2.add-to-cart(data-cart-product-id=`${product.id}`)
-                            i.fas.fa-shopping-basket
-                            | Add to Cart
+                            div
+                                i.fas.fa-shopping-basket
+                                | Add to Cart

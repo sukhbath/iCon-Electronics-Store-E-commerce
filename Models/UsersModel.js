@@ -67,9 +67,31 @@ var UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-
-
+}, {
+    toJSON: {
+        virtuals: true
+    },
+    toObject: {
+        virtuals: true
+    }
 })
+
+UserSchema.virtual("cart", {
+    ref: 'Carts', // The model to use
+    localField: '_id', // Find people where `localField`
+    foreignField: 'user'
+    // // 
+    // ref: "Carts",
+    // foreignField: "user",
+    // localField: '_id'
+})
+
+UserSchema.pre(/^find/, function (next) {
+    this.populate("cart")
+    next()
+})
+
+
 
 UserSchema.pre("save", function (next) {
     if (this.isModified('password')) {
@@ -79,6 +101,7 @@ UserSchema.pre("save", function (next) {
     }
     next()
 })
+
 
 
 

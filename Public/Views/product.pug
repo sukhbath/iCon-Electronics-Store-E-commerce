@@ -10,8 +10,8 @@ block body
                     each image in product.images
                         img(src=`/images/${image}.jpg` alt='' srcset='')
             .detail
-                h3 Apple&gt;Laptop
-                h1= product.name
+                h3.brand Apple
+                h1.heading= product.name
                 div
                     span.rating
                         - for (var x = 0; x < 5; x++)
@@ -20,20 +20,24 @@ block body
                             else
                                 i.fas.fa-star 
                         
-                    span
-                    | #{product.avgRating}/5.0  by #{product.qtyRatings} people
-                h1 $#{product.price}
-                h3= product.summary
-                #quantity-wrap
-                    input#quantity(type='number' name='')
+                    div.rating-num 
+                        span #{Math.round(product.avgRating*10)/10}/5  
+                        |by 
+                        span #{product.qtyRatings} 
+                            i(class="fas fa-users")
+                            | People
+                h1.price $#{product.price}
+                p.summary= product.summary
+                //- #quantity-wrap
+                //-     input#quantity(type='number' name='')
                 .buttons.flex-container
                     button.add-to-cart(data-cart-product-id=`${product.id}`)
                         i.fas.fa-shopping-basket
                         | Add to Cart
-                    button.add-to-wishlist
-                        i.far.fa-heart
-                        | Save to Wishlist
-                p Get delivered in 2-4 business days.
+                    //- button.add-to-wishlist
+                    //-     i.far.fa-heart
+                    //-     | Save to Wishlist
+                p.delivery Get delivered in 2-4 business days.
         #reviews-wrap
             h1 Reviews
             each review in product.reviews
@@ -49,9 +53,11 @@ block body
                                     i.fas.fa-star
                         p= review.review
             #add-review
+                h1 Add Review
                 form#add-review-form(data-cart-product-id=`${product.id}`)
+                    input(type='number' placeholder='5' id="rating")
+                    //- textarea#review(name="", cols="30", rows="10")
                     input(type='text' placeholder='review...' id="review")
-                    input(type='number' placeholder='rating' id="rating")
                     button#post-review Post Review
 
 
