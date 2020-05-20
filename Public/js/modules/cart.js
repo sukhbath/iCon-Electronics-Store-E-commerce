@@ -31,7 +31,7 @@ async function checkOut() {
         var response = await axios.get(`/api/v1/cart/checkout`);
         showAlertBox('Successfully Checked Out')
         setTimeout(() => {
-            window.location.replace('/shop')
+            window.location.replace('/mycart')
         }, 3000);
     } catch (error) {
         showAlertBox(error.response.message, true)
