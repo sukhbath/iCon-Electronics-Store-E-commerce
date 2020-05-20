@@ -140,6 +140,10 @@ header .buttons {
     left: 60%;
 }
 
+.icon-more {
+    padding: 0 .5rem;
+}
+
 .drop-down {
     position: relative;
 }
@@ -817,4 +821,54 @@ main {
 
 #forgetPassword p {
     margin: .5rem;
+}
+
+
+/* footer */
+
+footer {
+    background: #253dd5;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 4rem;
+
+}
+
+footer h3 {
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+
+footer .flex-container {
+    justify-content: space-between;
+    width: 30%;
+    margin: 1rem auto;
+}
+
+footer i {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+footer i:hover {
+    transform: scale(1.1);
+    color: white;
+}
+
+footer a {
+    display: block;
+    color: white;
+}
+
+
+
+footer img {
+    width: 10rem;
+    height: 5rem;
+    object-fit: contain;
+    object-fit: cover;
 }
