@@ -501,6 +501,8 @@ main {
 
 #detail-wrap .images>img {
     width: 100%;
+    height: 80vh;
+    object-fit: contain;
 }
 
 #detail-wrap .more-images {

@@ -5,7 +5,7 @@ block body
         #all-products.flex-container
             each product in products
                 .product
-                    img(src=`/images/${product.coverImage}.jpg` alt='')
+                    img(src=`/images/products/${product.name}/${product.coverImage}.jpg` alt='')
                     div
                         h2.name= product.name
                         .rating

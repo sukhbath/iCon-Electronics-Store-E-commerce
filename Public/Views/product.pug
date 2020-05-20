@@ -3,12 +3,12 @@ block body
     main
         #detail-wrap.flex-container
             .images
-                img(src=`/images/${product.coverImage}.jpg` alt='' srcset='')
+                img(src=`/images/products/${product.name}/${product.coverImage}.jpg` alt='' srcset='')
                 .more-images.flex-container
                     each image in product.images
-                        img(src=`/images/${image}.jpg` alt='' srcset='')
+                        img(src=`/images/products/${product.name}/${image}.jpg` alt='' srcset='')
             .detail
-                h3.brand Apple
+                h3.brand= product.category
                 h1.heading= product.name
                 div
                     span.rating
