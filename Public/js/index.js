@@ -187,3 +187,18 @@ if (checkOutBtn) {
         checkOut()
     })
 }
+
+
+
+$('.icon-more').click(function (e) {
+    $('.drop-down-content').toggle();
+
+});
+
+$('.bars, header i.close-menu').click(function (e) {
+    var right = $('nav.flex-container').css('right');
+    if (right.startsWith('0')) {
+        return $('nav.flex-container').css('right', '-100%');
+    }
+    $('nav.flex-container').css('right', '00%');
+});

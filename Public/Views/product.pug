@@ -43,7 +43,7 @@ block body
                     img(src=`/images/users/${review.user.photo}` alt='' srcset='')
                     div
                         div.flex-container.name-time
-                            h2= review.user.name
+                            h2.review-user-name= review.user.name
                             p.review-time= review.createdAt.toDateString()
                         span.rating
                             - for (var x = 0; x < 5; x++)

@@ -1,15 +1,14 @@
 header.flex-container
+  a.logo(href='/')
+    img(src='/images/icons/logo.png' alt='')
   nav.flex-container
-    a.logo(href='/')
-      img(src='/images/icons/logo.png' alt='')
     a(href='/shop?category=Laptops') Laptops
     a(href='/shop?category=Mobiles') Mobiles
     a(href='/shop?category=Accessories') Accessories 
     a(href='/shop') All
+    i.far.fa-times-circle.close-menu
   .buttons.flex-container
     if user
-      //- #wish-cart-btn
-      //-   i.fas.fa-heart
       #product-cart-btn
         a(href='/mycart') 
           i.fas.fa-shopping-cart
@@ -17,15 +16,16 @@ header.flex-container
     #user-btn.drop-down
       #current-user.flex-container
         if user
-          img(src=`/images/users/${user.photo}` alt='')
-          span.user-name= user.name
+          a(href='/me').flex-container.profile-link
+            img(src=`/images/users/${user.photo}` alt='')
+            span.user-name #{user.name.split(' ')[0]}
         else
           a(href='/login') Login
-        i.fas.fa-caret-down.icon-more
+        i.fas.fa-ellipsis-v.icon-more
+        i.fas.fa-bars.bars
       .drop-down-content
         if user
           div 
-            a(href='/me') Profile
             a(class='logout-btn') Logout
         else
           a(href='/signup') Signup

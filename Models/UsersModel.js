@@ -40,12 +40,14 @@ var UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+        trim: true,
         required: [true, "Users must provide their password."],
         minlength: 5,
         select: false
     },
     confirmPassword: {
         type: String,
+        trim: true,
         required: [true, "Users must confirm their password."],
         select: false,
         validate: {

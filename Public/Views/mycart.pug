@@ -19,10 +19,11 @@ block body
                             h3 $#{cartproduct.product.price}
                         button.cart-product-remove-btn(data-cart-product-id=`${cartproduct.id}`)
                             i(class="fas fa-times")
-        #cart-total
-            h2 Your Total is: 
-                span.total $#{Math.round(cartProducts.totalPrice*100)/100}
-            .flex-container
-                button Check Out All
+        if cartProducts.length>0
+            #cart-total
+                h2 Your Total is: 
+                    span.total $#{Math.round(cartProducts.totalPrice*100)/100}
+                .flex-container
+                    button Check Out All
 
-                    
+                        

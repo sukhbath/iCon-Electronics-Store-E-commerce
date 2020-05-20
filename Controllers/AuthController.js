@@ -204,7 +204,7 @@ exports.resetPassword = CatchError(async (request, response, next) => {
 
 exports.updateMe = CatchError(async (request, response, next) => {
 
-    request.body.photo = request.file ? request.file.filename : "default-user.png"
+    request.body.photo = request.file ? request.file.filename : request.user.photo
 
     var user = await UserModel.findByIdAndUpdate(request.user.id, request.body, {
         validateBeforeSave: true,
