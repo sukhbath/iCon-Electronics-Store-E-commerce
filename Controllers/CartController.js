@@ -1,51 +1,45 @@
 var CartModel = require('../Models/CartModel')
 var CatchError = require('../Utils/CatchError')
+var CommonController = require('./CommonController')
 
-exports.getAllCartProducts = CatchError(async (request, response, next) => {
-    var cartProducts = await CartModel.find({
+exports.getOneCartProduct = CommonController.getOneDocument(CartModel)
+exports.deleteFromCart = CommonController.deleteDocument(CartModel)
+exports.getUserCart = CommonController.getAllDocument(CartModel)
+exports.addToUserCart = CommonController.createDocument(CartModel)
+
+
+
+
+
+
+
+
+exports.setUserId = CatchError(async (request, response, next) => {
+    request.body.user = request.user.id
+    next()
+})
+
+
+exports.setFilterObj = CatchError(async (request, response, next) => {
+    request.filter = {
         user: request.user.id
-    })
-    response.status(201).send({
-        status: "success",
-        length: cartProducts.length,
-        data: {
-            cartProducts
-        }
-    })
-})
-
-exports.addToCart = CatchError(async (request, response, next) => {
-    var cartProduct = await CartModel.create({
-        user: request.user.id,
-        product: request.body.product
-    })
-    response.status(201).send({
-        status: "success",
-        message: "Product Added",
-        data: {
-            cartProduct
-        }
-    })
+    }
+    next()
 })
 
 
-exports.getOneCartProduct = CatchError(async (request, response, next) => {
-    var cartProduct = await CartModel.findById(request.params.id)
-    response.status(201).send({
-        status: "success",
-        data: {
-            cartProduct
-        }
-    })
-})
 
 
-exports.deleteCartProduct = CatchError(async (request, response, next) => {
-    var cartProduct = await CartModel.findByIdAndDelete(request.params.id)
-    response.status(204).send({
-        status: "success",
-        data: {
-            cartProduct
-        }
-    })
-})
+// CatchError(async (request, response, next) => {
+//     var cartProduct = await CartModel.create({
+//         user: request.user.id,
+//         product: request.body.product
+//     })
+//     response.status(201).send({
+//         status: "success",
+//         message: "Product Added",
+//         data: {
+//             cartProduct
+//         }
+//     })
+// })

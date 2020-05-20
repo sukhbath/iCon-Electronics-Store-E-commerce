@@ -27,19 +27,12 @@ function sendToken(user, statusCode, message, response) {
 }
 
 exports.signup = CatchError(async (request, response, next) => {
-    if (request.file) {
-        request.body.photo = request.file.filename
-    } else {
-        request.body.photo = "default-user.png"
-    }
-
-    console.log(request.body)
+    request.body.photo = request.file ? request.file.filename : "default-user.png"
     var user = await UserModel.create(request.body)
     sendToken(user, 201, "User Signed up", response)
 })
 
 exports.login = CatchError(async (request, response, next) => {
-    console.log(request.body)
     var {
         email,
         password
@@ -53,7 +46,7 @@ exports.login = CatchError(async (request, response, next) => {
 
     if (!user || !user.isCorrectPassword(password, user.password)) return next(new CustomError("Invalid email or password", 404))
 
-    sendToken(user, 201, "User Logged in", response)
+    sendToken(user, 200, "User Logged in", response)
 })
 
 
@@ -133,8 +126,6 @@ exports.updatePassword = CatchError(async (request, response, next) => {
         confirmPassword
     } = request.body
 
-    // if (!oldPassword || !password || !confirmPassword) return next(new CustomError("Please provide all fields", 400))
-
     var user = await UserModel.findById(request.user.id).select('+password')
 
     if (!user.isCorrectPassword(oldPassword, user.password)) return next(new CustomError("Old password does not match", 400))
@@ -154,7 +145,7 @@ exports.forgetPassword = CatchError(async (request, response, next) => {
         email: request.body.email
     })
 
-    if (!user) return next(new CustomError("No assocciate user found❌", 404))
+    if (!user) return next(new CustomError("No user found❌", 404))
 
     var tempPassword = user.createTempPassword()
     await user.save({
@@ -201,19 +192,13 @@ exports.resetPassword = CatchError(async (request, response, next) => {
 
 exports.updateMe = CatchError(async (request, response, next) => {
 
-    if (request.file) {
-        request.body.photo = request.file.filename
-    } else {
-        request.body.photo = request.user.photo
-    }
-    console.log('request.bod')
-    console.log(request.body)
-
+    request.body.photo = request.file ? request.file.filename : "default-user.png"
 
     var user = await UserModel.findByIdAndUpdate(request.user.id, request.body, {
         validateBeforeSave: true,
         new: true
     })
+
     response.send({
         status: "success",
         message: "Information updated",

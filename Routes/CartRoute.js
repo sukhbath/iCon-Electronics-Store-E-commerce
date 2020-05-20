@@ -8,10 +8,12 @@ var router = express.Router({
 
 router.use(AuthController.protect)
 
-router.route('/').get(CartController.getAllCartProducts).post(CartController.addToCart)
-router.route('/:id').get(CartController.getOneCartProduct).delete(CartController.deleteCartProduct)
+router.route('/')
+    .get(CartController.setFilterObj, CartController.getUserCart)
+    .post(CartController.setUserId, CartController.addToUserCart)
 
-
-
+router.route('/:id')
+    .get(CartController.getOneCartProduct)
+    .delete(CartController.deleteFromCart)
 
 module.exports = router

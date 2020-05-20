@@ -1,43 +1,50 @@
 var ProductModel = require('../Models/ProductsModel')
 var UserModel = require('../Models/UsersModel')
 var CartModel = require('../Models/CartModel')
+var CommonController = require('../Controllers/CommonController')
 
 exports.indexPage = async function (request, response, next) {
     var products = await ProductModel.find()
     response.render("index", {
-        products
+        products,
+        title: "Welcome to iCon"
     })
 }
 
-
-
+// CommonController.sendView(request, response, next)
 exports.getAllProducts = async function (request, response, next) {
     var products = await ProductModel.find()
     response.render("shop", {
-        products
+        products,
+        title: "Shop Best Items"
+
     })
 }
-
 
 exports.getOneProduct = async function (request, response, next) {
     var product = await ProductModel.findOne({
         slug: request.params.slug
     }).populate('reviews')
-    console.log(product)
     response.render("product", {
-        product
+        product,
+        title: product.name
+
     })
 }
 
 
 
 exports.login = async function (request, response, next) {
-    response.render("login")
+    response.render("login", {
+        title: "Login to Your Account"
+    })
 }
 
 
 exports.signup = async function (request, response, next) {
-    response.render("signup")
+    response.render("signup", {
+        title: "Sign in to iCon"
+    })
 
 }
 
@@ -47,54 +54,41 @@ exports.signup = async function (request, response, next) {
 exports.me = async function (request, response, next) {
     var me = await UserModel.findById(request.user.id)
     response.render('me', {
-        me
+        me,
+        title: me.name
     })
 }
-
-exports.forgetPassword = async function (request, response, next) {
-    // var me = await UserModel.findById(request.user.id)
-    // response.render('forgetPassword', {
-    //     me
-    // })
-}
-
-exports.updateMe = async function (request, response, next) {
-    var me = await UserModel.findByIdAndUpdate(request.user.id, request.body)
-    response.render('me', {
-        me
-    })
-}
-
-
 
 
 exports.getAllCartProducts = async function (request, response, next) {
-    console.log('i aj=m invoked')
     var cartProducts = await CartModel.find({
         user: request.user.id
     }).populate("product")
-
-    console.log(cartProducts)
-    // {
-    //     path: "product",
-    //     select: "name slug coverImage"
-    // }
-
     response.render('mycart', {
-        cartProducts
+        cartProducts,
+        title: "My Products"
     })
+
 }
 
 
+
 exports.forgetPassword = async function (request, response, next) {
-    response.render("forgetPassword")
+    sendView(response, "forgetPassword", "Forget Password")
 }
 
 
 exports.resetPassword = async function (request, response, next) {
-    response.render("resetPassword")
+    sendView(response, "resetPassword", "Reset Password")
 }
 
 exports.updatePassword = async function (request, response, next) {
-    response.render("updatePassword")
+    sendView(response, "updatePassword", "Update Password")
+}
+
+
+function sendView(response, view, title) {
+    response.render(view, {
+        title
+    })
 }

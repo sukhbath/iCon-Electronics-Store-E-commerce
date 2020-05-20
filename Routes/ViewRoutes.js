@@ -17,12 +17,7 @@ route.route('/login').get(ViewController.login)
 route.route('/signup').get(ViewController.signup)
 route.route('/updatePassword').get(ViewController.updatePassword)
 route.route('/mycart').get(AuthController.protect, ViewController.getAllCartProducts)
-
-route.route('/updateMe').post(ViewController.updateMe)
-
 route.route('/me').get(AuthController.protect, ViewController.me)
-
-
 
 
 module.exports = route

@@ -31,18 +31,12 @@ var DuplicateError = function (error) {
 }
 
 
-// var IndexError = function (error) {
-//     myerror = new CustomError(`Alredy exist`, 400)
-//     return myerror
-// }
-
 var LoginError = function (error) {
     myerror = new CustomError(`Please Login to get access`, 400)
     return myerror
 }
 
 module.exports = (error, request, response, next) => {
-    console.log("error middlwwawre")
     var myerror;
     if (error.name == 'ValidationError') {
         myerror = validationError(error)
@@ -63,8 +57,4 @@ module.exports = (error, request, response, next) => {
             error: myerror.message
         })
     }
-
-
-
-
 }

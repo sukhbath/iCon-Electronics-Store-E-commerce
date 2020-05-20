@@ -11,7 +11,7 @@ exports.createDocument = Model => CatchError(async function (request, response, 
 })
 
 exports.getAllDocument = Model => CatchError(async function (request, response, next) {
-    var documents = await Model.find()
+    var documents = await Model.find(request.filter)
     response.status(200).send({
         status: "success",
         length: documents.length,
@@ -56,3 +56,14 @@ exports.deleteDocument = Model => CatchError(async function (request, response, 
         }
     })
 })
+
+
+
+// exports.sendView = (request, response, next) =>
+//     async function (request, response, next) {
+//         var products = await ProductModel.find()
+//         response.render("index", {
+//             products,
+//             title: "Welcome to iCon"
+//         })
+//     }

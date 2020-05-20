@@ -9,8 +9,7 @@ var router = express.Router()
 router.route('/').get(ProductController.getAllProducts).post(ProductController.createProduct)
 router.route('/:id').get(AuthController.protect, ProductController.getOneProduct)
 
-
-router.route('/:tourId/reviews').get(ReviewtController.getAllReviewForTour)
+router.use('/:productId/reviews', ReviewRoute)
 
 
 module.exports = router
