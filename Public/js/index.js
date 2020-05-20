@@ -20,7 +20,6 @@ import {
     addReview
 } from "./modules/review.js"
 
-var stripe = Stripe('pk_test_z8Xn3BxmoWYolSiRNpTTnz08004PWk8haG');
 
 // logout
 var logOutBtn = document.querySelector(".logout-btn")
