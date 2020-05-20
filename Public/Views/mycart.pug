@@ -9,14 +9,20 @@ block body
             else
                 each cartproduct in cartProducts
                     .cart-product.flex-container
-                        img(src=`/images/${cartproduct.product.coverImage}.jpg`, alt="alt")
+                        img(src=`/images/products/${cartproduct.product.name}/${cartproduct.product.coverImage}.jpg`, alt="alt")
                         .detail
                             h3.name
                                 a(href=`/product/${cartproduct.product.slug}`)= cartproduct.product.name
-                        .quantity
-                            p= cartproduct.quantity
+                        //- .quantity
+                        //-     p= cartproduct.quantity
                         .price
-                            h3= cartproduct.product.price
-                        button#cart-product-remove-btn(data-cart-product-id=`${cartproduct.id}`)
+                            h3 $#{cartproduct.product.price}
+                        button.cart-product-remove-btn(data-cart-product-id=`${cartproduct.id}`)
                             i(class="fas fa-times")
+        #cart-total
+            h2 Your Total is: 
+                span.total $#{Math.round(cartProducts.totalPrice*100)/100}
+            .flex-container
+                button Check Out All
+
                     

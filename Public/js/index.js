@@ -13,7 +13,8 @@ import {
 
 import {
     removeFromCart,
-    addToCart
+    addToCart,
+    checkOut
 } from "./modules/cart.js"
 
 import {
@@ -39,12 +40,14 @@ if (loginForm) {
 }
 
 // remove from cart
-var removeCartProduct = document.getElementById('cart-product-remove-btn')
+var removeCartProduct = document.querySelectorAll('.cart-product-remove-btn')
 if (removeCartProduct) {
-    removeCartProduct.addEventListener('click', async function (param) {
-        var id = document.getElementById('cart-product-remove-btn').dataset.cartProductId
-        removeFromCart(id)
-    })
+    removeCartProduct.forEach(element => {
+        element.addEventListener('click', async function (param) {
+            var id = element.dataset.cartProductId
+            removeFromCart(id)
+        })
+    });
 }
 
 // add to cart from product page
@@ -115,6 +118,11 @@ if (forgetPasswordForm) {
                 email
             })
             console.log(response)
+            showAlertBox(response.data.message)
+            setTimeout(() => {
+                window.location.replace('/resetPassword')
+            }, 3000);
+
         } catch (error) {
             console.log(error.response)
             showAlertBox(error.response.data.message, true)
@@ -133,13 +141,16 @@ if (resetPasswordForm) {
         var password = $('.form#resetPassword-form #password').val()
         var confirmPassword = $('.form#resetPassword-form #confirmPassword').val()
         try {
-            var response = await axios.patch(`/api/v1/users//resetPassword/${tempPassword}`, {
+            var response = await axios.patch(`/api/v1/users/resetPassword`, {
+                tempPassword,
                 password,
                 confirmPassword
             })
             console.log(response)
             showAlertBox(response.data.message)
-            window.location.reload('/me')
+            setTimeout(() => {
+                window.location.replace('/me')
+            }, 3000);
         } catch (error) {
             console.log(error.response)
             showAlertBox(error.response.data.message, true)
@@ -169,12 +180,10 @@ if (updateMeForm) {
 }
 
 
-// document.getElementById('image-input').addEventListener('change', function (e) {
-//     if (e.target.files) {
-//         var reader = new FileReader();
-//         reader.onload = function (e) {
-//             document.getElementById('selected-image').setAttribute('src', e.target.result)
-//         };
-//         reader.readAsDataURL(e.target.files[0]);
-//     }
-// })
+var checkOutBtn = document.querySelector('#cart-total button')
+console.log(checkOutBtn)
+if (checkOutBtn) {
+    checkOutBtn.addEventListener('click', e => {
+        checkOut()
+    })
+}

@@ -11,9 +11,8 @@ exports.indexPage = async function (request, response, next) {
     })
 }
 
-// CommonController.sendView(request, response, next)
 exports.getAllProducts = async function (request, response, next) {
-    var products = await ProductModel.find()
+    var products = await ProductModel.find(request.query)
     response.render("shop", {
         products,
         title: "Shop Best Items"
@@ -28,7 +27,6 @@ exports.getOneProduct = async function (request, response, next) {
     response.render("product", {
         product,
         title: product.name
-
     })
 }
 
@@ -64,6 +62,7 @@ exports.getAllCartProducts = async function (request, response, next) {
     var cartProducts = await CartModel.find({
         user: request.user.id
     }).populate("product")
+
     response.render('mycart', {
         cartProducts,
         title: "My Products"

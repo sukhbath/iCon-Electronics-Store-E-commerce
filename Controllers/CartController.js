@@ -10,7 +10,18 @@ exports.addToUserCart = CommonController.createDocument(CartModel)
 
 
 
+exports.checkOut = CatchError(async (request, response, next) => {
+    var docs = await CartModel.deleteMany({
+        user: request.user.id
+    })
 
+    response.status(204).send({
+        status: "success",
+        message: "Successfully Checked Out",
+    })
+
+    next()
+})
 
 
 

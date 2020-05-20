@@ -8,7 +8,7 @@ async function removeFromCart(id) {
         var response = await axios.delete(`/api/v1/cart/${id}`);
         window.location.reload()
     } catch (error) {
-        showAlertBox(error.response)
+        showAlertBox(error.response.message, true)
     }
 }
 
@@ -21,12 +21,26 @@ async function addToCart(id) {
         var cartQty = document.getElementById('cart-qty')
         cartQty.textContent = 1 * (cartQty.textContent) + 1
     } catch (error) {
-        showAlertBox(error.response.data.message)
+        showAlertBox(error.response.data.message, true)
+    }
+}
+
+
+async function checkOut() {
+    try {
+        var response = await axios.get(`/api/v1/cart/checkout`);
+        showAlertBox('Successfully Checked Out')
+        setTimeout(() => {
+            window.location.replace('/shop')
+        }, 3000);
+    } catch (error) {
+        showAlertBox(error.response.message, true)
     }
 }
 
 
 export {
     removeFromCart,
-    addToCart
+    addToCart,
+    checkOut
 }

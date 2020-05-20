@@ -1,11 +1,11 @@
 header.flex-container
   nav.flex-container
     a.logo(href='/')
-      img(src='/logo.png' alt='')
-    a(href='/shop') Laptops
-    a(href='#') Mobiles
+      img(src='/images/icons/logo.png' alt='')
+    a(href='/shop?category=Laptops') Laptops
+    a(href='/shop?category=Mobiles') Mobiles
+    a(href='/shop?category=Accessories') Accessories 
     a(href='/shop') All
-    a(href='#') About
   .buttons.flex-container
     if user
       //- #wish-cart-btn

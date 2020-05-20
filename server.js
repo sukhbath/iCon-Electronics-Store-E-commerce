@@ -1,8 +1,6 @@
 var dotenv = require('dotenv')
 var app = require('./app')
 var mongoose = require('mongoose')
-mongoose.set('useFindAndModify', false);
-
 
 dotenv.config({
     path: `${__dirname}/config.env`
@@ -10,6 +8,10 @@ dotenv.config({
 
 
 mongoose.connect(process.env.DB_URL, {
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
     useUnifiedTopology: true,
     useNewUrlParser: true
 }).then(v => {

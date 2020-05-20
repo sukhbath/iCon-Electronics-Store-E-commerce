@@ -46,7 +46,7 @@ var UserSchema = new mongoose.Schema({
     },
     confirmPassword: {
         type: String,
-        required: [true, "Users must consfirm their password."],
+        required: [true, "Users must confirm their password."],
         select: false,
         validate: {
             validator: function (comfirmPass) {

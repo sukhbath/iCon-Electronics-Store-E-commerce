@@ -8,7 +8,7 @@ block body
                     each image in product.images
                         img(src=`/images/products/${product.name}/${image}.jpg` alt='' srcset='')
             .detail
-                h3.brand= product.category
+                h3.brand= product.brand
                 h1.heading= product.name
                 div
                     span.rating

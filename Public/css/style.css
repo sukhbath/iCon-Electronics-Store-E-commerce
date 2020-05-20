@@ -21,6 +21,12 @@ button {
     cursor: pointer;
 }
 
+hr {
+    border: #55555531;
+    background: #55555531;
+    padding: .2rem;
+    margin: 1rem;
+}
 
 a {
     display: inline-block;
@@ -53,7 +59,7 @@ body {
     text-align: center;
     min-width: 30%;
     max-width: 50%;
-    transition: .7s top;
+    transition: .5s top;
 }
 
 #notify-dialog {
@@ -404,16 +410,12 @@ main {
     transform: translate(-50%, 0);
 }
 
-
-
-
-
 #image-label img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50px;
-    padding: .1rem;
+    /* padding: .1rem; */
 }
 
 
@@ -640,11 +642,6 @@ main {
     margin-right: .5rem;
 }
 
-.review .rating {
-    margin: .3rem 0;
-    display: inline-block;
-    color: #fcb332;
-}
 
 
 #add-review form {
@@ -688,8 +685,8 @@ main {
     width: 70%;
     margin: auto;
     padding: 1rem;
-    background: rgb(255, 255, 255);
     border-radius: 3px;
+    background: rgb(255, 255, 255);
     box-shadow: 0px 2px 8px rgb(219, 219, 219);
 
 }
@@ -732,6 +729,38 @@ main {
 
 }
 
+#cart-total {
+    width: 70%;
+    margin: 2rem auto;
+    padding-top: 1rem;
+    border-radius: 3px;
+    color: #fcb332;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 2px 8px rgb(219, 219, 219);
+    overflow: hidden;
+}
+
+#cart-total span {
+    background: #ec483f;
+    padding: .5rem;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+}
+
+#cart-total button {
+    background: #00ba93;
+    padding: 1rem;
+    color: white;
+    display: block;
+    width: 100%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin: 1rem auto 0;
+    font-weight: 500;
+}
+
 
 
 /* profile page */
@@ -742,6 +771,7 @@ main {
 #profile>img {
     width: 10rem;
     height: 10rem;
+    /* object-fit: cover; */
     border-radius: 50%;
 }
 
@@ -767,7 +797,8 @@ main {
 #updateMe h2 {
     text-align: center;
     margin: 1rem 0;
-    color: #ec483f;
+    color: #00ba93;
+    font-size: 2rem;
 }
 
 #reset-password-link {
@@ -781,4 +812,9 @@ main {
     cursor: pointer;
     font-size: 1.2rem;
     margin: 1rem auto;
+}
+
+
+#forgetPassword p {
+    margin: .5rem;
 }

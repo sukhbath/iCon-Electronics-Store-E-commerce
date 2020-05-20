@@ -12,8 +12,11 @@ router.route('/')
     .get(CartController.setFilterObj, CartController.getUserCart)
     .post(CartController.setUserId, CartController.addToUserCart)
 
+router.get('/checkout', CartController.checkOut)
+
 router.route('/:id')
     .get(CartController.getOneCartProduct)
     .delete(CartController.deleteFromCart)
+
 
 module.exports = router

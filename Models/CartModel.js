@@ -10,14 +10,6 @@ var CartSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'products'
     },
-    quantity: {
-        type: Number,
-        default: 1
-    },
-    // price: {
-    //     type: Date,
-    //     default: Date.now()
-    // },
     addedAt: {
         type: Date,
         default: Date.now()
@@ -39,11 +31,22 @@ CartSchema.index({
     unique: true
 })
 
+CartSchema.post('find', function (docs, next) {
+    var totalPrice = 0
+    docs.forEach(element => {
+        totalPrice += element.product.price
+    });
+
+    docs.totalPrice = totalPrice
+    next()
+})
+
+
 
 CartSchema.pre(/^find/, function (next) {
     this.populate({
         path: "product",
-        select: "name slug coverImage"
+        select: "name slug coverImage price"
     })
     next()
 })

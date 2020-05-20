@@ -36,6 +36,11 @@ var LoginError = function (error) {
     return myerror
 }
 
+var PasswdLengthError = function (error) {
+    myerror = new CustomError(`Password length must be atleas 5`, 400)
+    return myerror
+}
+
 module.exports = (error, request, response, next) => {
     var myerror;
     if (error.name == 'ValidationError') {
@@ -47,6 +52,7 @@ module.exports = (error, request, response, next) => {
     } else {
         myerror = error
     }
+
 
     console.log(error)
 

@@ -7,6 +7,11 @@ var crypto = require('crypto')
 var utils = require('util')
 var SendEmail = require('../Utils/Email')
 var generator = require('generate-password');
+var Email = require('../Utils/Email')
+var email = new Email()
+var {
+    promisify
+} = require('util')
 
 function sendToken(user, statusCode, message, response) {
     var token = jwt.sign({
@@ -29,6 +34,7 @@ function sendToken(user, statusCode, message, response) {
 exports.signup = CatchError(async (request, response, next) => {
     request.body.photo = request.file ? request.file.filename : "default-user.png"
     var user = await UserModel.create(request.body)
+    email.sendWelcome(user)
     sendToken(user, 201, "User Signed up", response)
 })
 
@@ -38,7 +44,7 @@ exports.login = CatchError(async (request, response, next) => {
         password
     } = request.body
 
-    if (!email || !password) return next(new CustomError("Must provide email and password🔐", 400))
+    if (!email || !password) return next(new CustomError("Must provide email and password", 400))
     var user = await UserModel.findOne({
         email
     }).select("+password")
@@ -132,7 +138,9 @@ exports.updatePassword = CatchError(async (request, response, next) => {
 
     user.password = password;
     user.confirmPassword = confirmPassword
-    await user.save()
+    var user = await user.save()
+
+    email.sendUpdatePassword(user)
 
     sendToken(user, 201, 'Password has been successfully updated', response)
 
@@ -145,29 +153,31 @@ exports.forgetPassword = CatchError(async (request, response, next) => {
         email: request.body.email
     })
 
-    if (!user) return next(new CustomError("No user found❌", 404))
+    if (!user) return next(new CustomError("No user found", 404))
 
     var tempPassword = user.createTempPassword()
     await user.save({
         validateBeforeSave: false
     })
 
+    email.sendToken(user, tempPassword)
+
+
+
     response.send({
         status: "success",
-        message: "The temperoray password expires in 10 minutes.",
-        tempPassword
+        message: "The temperoray password has been sent to your email.",
     })
 })
 
 
 
 exports.resetPassword = CatchError(async (request, response, next) => {
-    console.log('request.params.tempPassword')
-    var tempPassword = request.params.tempPassword
-    var hashedtempPassword = crypto
-        .createHash("sha256")
+    var tempPassword = request.body.tempPassword
+    var hashedtempPassword = crypto.createHash("sha256")
         .update(tempPassword)
         .digest("hex");
+
 
     var user = await UserModel.findOne({
         tempPassword: hashedtempPassword,
@@ -182,7 +192,9 @@ exports.resetPassword = CatchError(async (request, response, next) => {
     user.tempPassword = undefined
     user.tempPasswordTime = undefined
 
-    await user.save()
+    var user = await user.save()
+
+    email.sendUpdatePassword(user)
 
     sendToken(user, 200, "Password has been reset", response)
 
@@ -199,6 +211,7 @@ exports.updateMe = CatchError(async (request, response, next) => {
         new: true
     })
 
+    email.sendUpdateProfile(user)
     response.send({
         status: "success",
         message: "Information updated",

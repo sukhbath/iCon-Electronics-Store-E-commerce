@@ -14,7 +14,7 @@ async function login() {
         showAlertBox('Successfully logged in')
         setTimeout(() => {
             window.location.replace('/shop')
-        }, 2000);
+        }, 3000);
     } catch (error) {
         showAlertBox(error.response.data.message, true)
     }
@@ -40,7 +40,6 @@ async function signup() {
     var password = $('.form.signup #password').val()
     var confirmPassword = $('.form.signup #confirmPassword').val()
     var photo = $('.form.signup #image-input').prop('files')[0];
-    // ('.form.signup #image-input').files[0]
 
     let form = new FormData()
 
@@ -55,7 +54,7 @@ async function signup() {
         showAlertBox('Account created successfuly')
         setTimeout(v => {
             window.location.replace('/shop')
-        }, 1500)
+        }, 3000)
     } catch (error) {
         showAlertBox(error.response.data.message, true)
     }
@@ -78,7 +77,7 @@ async function updateMe() {
         console.log(response)
         setTimeout(v => {
             window.location.replace('/me')
-        }, 1500)
+        }, 3000)
     } catch (error) {
         showAlertBox(error.response.data.message, true)
         console.log(error.response)
@@ -106,8 +105,8 @@ async function updatePassword() {
         showAlertBox(response.data.message)
         console.log(response)
         setTimeout(v => {
-            // window.location.replace('/me')
-        }, 1500)
+            window.location.replace('/me')
+        }, 3000)
     } catch (error) {
         showAlertBox(error.response.data.message, true)
         console.log(error.response)
