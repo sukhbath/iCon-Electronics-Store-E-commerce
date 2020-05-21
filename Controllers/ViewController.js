@@ -5,7 +5,7 @@ var CommonController = require('../Controllers/CommonController')
 
 exports.indexPage = async function (request, response, next) {
     var products = await ProductModel.find()
-    response.render("index", {
+    response.render("./index", {
         products,
         title: "Welcome to iCon"
     })

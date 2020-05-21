@@ -186,7 +186,7 @@ exports.resetPassword = CatchError(async (request, response, next) => {
         }
     })
 
-    if (!user) return next(new CustomError("Token invalid or exprired⏰", 404))
+    if (!user) return next(new CustomError("Token invalid or exprired", 404))
     user.password = request.body.password
     user.confirmPassword = request.body.confirmPassword
     user.tempPassword = undefined
