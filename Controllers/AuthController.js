@@ -78,12 +78,12 @@ exports.protect = CatchError(async (request, response, next) => {
         token = request.cookies.jwt
     }
 
-    if (!token) return next(new CustomError("Please login to get access🔑", 401))
+    if (!token) return next(new CustomError("Please login to get access", 401))
 
     var varify = utils.promisify(jwt.verify)
     var data = await varify(token, process.env.SALT)
     var user = await UserModel.findById(data.id)
-    if (!user) return next(new CustomError("This user does'nt exist now.🔑", 401))
+    if (!user) return next(new CustomError("This user does'nt exist now.", 401))
 
     if (user.hasChangedPassword(data.iat)) return next(new CustomError("Password changed, Login again➰", 401))
 

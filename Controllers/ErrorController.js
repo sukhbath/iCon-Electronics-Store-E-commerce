@@ -54,8 +54,6 @@ module.exports = (error, request, response, next) => {
     }
 
 
-    console.log(error)
-
     if (request.originalUrl.startsWith("/api")) {
         response.status(myerror.status || 500).send(myerror)
     } else {

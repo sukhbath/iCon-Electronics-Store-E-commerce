@@ -17,7 +17,6 @@ async function addToCart(id) {
         var response = await axios.post(`/api/v1/cart`, {
             product: id
         });
-        console.log(response)
         var cartQty = document.getElementById('cart-qty')
         cartQty.textContent = 1 * (cartQty.textContent) + 1
     } catch (error) {

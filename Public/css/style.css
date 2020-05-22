@@ -103,7 +103,7 @@ nav a:not(.logo)::after {
     left: 0;
     width: 100%;
     height: 0;
-    background: #ec483f;
+    background: white;
     content: '';
     transition: .2s height;
     border-radius: 3px;
@@ -922,6 +922,8 @@ footer img {
     object-fit: cover;
 }
 
+
+
 @media screen and (max-width: 600px) {
 
     #alert-dialog {
@@ -977,6 +979,7 @@ footer img {
 
     header .buttons>div {
         margin: 0 .5rem;
+        margin: 0;
     }
 
     #current-user>i.fas.fa-bars.bars {
@@ -1089,9 +1092,6 @@ footer img {
     }
 
 
-    #updateMe form#updateMe-form {
-        width: 100%;
-    }
 
     /* cart page */
     #cart-products {
@@ -1109,6 +1109,8 @@ footer img {
     }
 
 
-
+    #updateMe form#updateMe-form {
+        width: 100%;
+    }
 
 }

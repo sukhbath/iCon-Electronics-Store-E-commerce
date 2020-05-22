@@ -117,14 +117,12 @@ if (forgetPasswordForm) {
             response = await axios.post('/api/v1/users/forgetPassword', {
                 email
             })
-            console.log(response)
             showAlertBox(response.data.message)
             setTimeout(() => {
                 window.location.replace('/resetPassword')
             }, 3000);
 
         } catch (error) {
-            console.log(error.response)
             showAlertBox(error.response.data.message, true)
         }
     })
@@ -146,13 +144,11 @@ if (resetPasswordForm) {
                 password,
                 confirmPassword
             })
-            console.log(response)
             showAlertBox(response.data.message)
             setTimeout(() => {
                 window.location.replace('/me')
             }, 3000);
         } catch (error) {
-            console.log(error.response)
             showAlertBox(error.response.data.message, true)
         }
     })
@@ -181,7 +177,6 @@ if (updateMeForm) {
 
 
 var checkOutBtn = document.querySelector('#cart-total button')
-console.log(checkOutBtn)
 if (checkOutBtn) {
     checkOutBtn.addEventListener('click', e => {
         checkOut()

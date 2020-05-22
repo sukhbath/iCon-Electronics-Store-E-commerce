@@ -23,13 +23,12 @@ async function login() {
 async function logOut() {
     try {
         var response = await axios.get('/api/v1/users/logout')
-        console.log(response)
         showAlertBox('Logged Out')
         setTimeout(() => {
             window.location.replace('/')
         }, 2000);
     } catch (error) {
-        console.log(error.response)
+        showAlertBox(error.response)
     }
 }
 
@@ -74,13 +73,11 @@ async function updateMe() {
     try {
         var response = await axios.post('/api/v1/users/updateMe', form)
         showAlertBox(response.data.message)
-        console.log(response)
         setTimeout(v => {
             window.location.replace('/me')
         }, 3000)
     } catch (error) {
         showAlertBox(error.response.data.message, true)
-        console.log(error.response)
     }
 }
 
@@ -90,12 +87,6 @@ async function updatePassword() {
     var password = $('#updatePassword-form #password').val()
     var confirmPassword = $('#updatePassword-form #confirmPassword').val()
 
-    console.log({
-        oldPassword,
-        password,
-        confirmPassword
-    })
-
     try {
         var response = await axios.post('/api/v1/users/updatePassword', {
             oldPassword,
@@ -103,13 +94,11 @@ async function updatePassword() {
             confirmPassword
         })
         showAlertBox(response.data.message)
-        console.log(response)
         setTimeout(v => {
             window.location.replace('/me')
         }, 3000)
     } catch (error) {
         showAlertBox(error.response.data.message, true)
-        console.log(error.response)
     }
 }
 

@@ -6,7 +6,6 @@ var storage = multer.diskStorage({
         cb(null, `${__dirname}/../Public/images/users`)
     },
     filename: function (request, file, cb) {
-        console.log("request")
         var ext = file.mimetype.split('/')[1]
         cb(null, `user-${request.body.name}-${Date.now()}.${ext}`)
     }
