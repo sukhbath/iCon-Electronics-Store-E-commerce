@@ -35,7 +35,7 @@
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
     "password-hash": "^1.2.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "slugify": "^1.4.0",
     "stripe": "^8.53.0",
     "validator": "^13.0.0"
